@@ -2,11 +2,11 @@
 
 # Penetration-Defense-Checklist
 
-A research article and interactive checklist based on thoughts by Setvin Noether (@SauerNinja), estimated at a 108-minute read.
+A research article and interactive checklist, estimated at a 116-minute read.
 
 American infrastructure and companies are under sustained attack from foreign state-linked hackers — telecoms, water utilities, energy grids, hospitals, and companies of every size. Most penetration testing cheat sheets go stale within a year: the tools and CVEs listed age out, while the underlying attack surface keeps shifting toward identity, cloud metadata, edge appliances, and AI infrastructure. This project takes the opposite approach. Every item in the checklist starts from a documented, real-world attack pattern and ends at a concrete, checkable defensive control — sourced to a public framework (CISA KEV, MITRE D3FEND, MITRE ATT&CK, NIST CSF 2.0, OWASP, NIST SP 800-series, and more) rather than a blog post or a stale wordlist.
 
-The checklist covers the full lifecycle of a modern security program across 22 sections, written from a defensive posture throughout:
+The checklist covers the full lifecycle of a modern security program across 23 sections, written from a defensive posture throughout:
 
 - **Pre-Engagement & Scope** — legal boundaries, rules of engagement, third-party inventory, insurance obligations
 - **Reconnaissance & Attack Surface Mapping** — asset discovery, certificate transparency, secret scanning, OSINT self-audit
@@ -30,8 +30,9 @@ The checklist covers the full lifecycle of a modern security program across 22 s
 - **Regulatory Compliance Mapping** — HIPAA, PCI DSS, GDPR/CCPA, SOX control mapping
 - **Business Continuity & Disaster Recovery** — RTO/RPO definitions, DR failover testing, alternate communications, manual fallback procedures, BIA review
 - **Incident & Crisis Management** — severity tiers, Incident Commander authority, RACI matrix, crisis communications by audience, legal/law enforcement contacts, blameless post-incident review
+- **Nation-State Threat Actor Profiles** — China, Russia, Iran, and North Korea's named threat groups, their distinct tactics, and the specific tricks to watch for from each
 
-Every one of the 217+ checklist items includes a plain-language Summary and a concrete real-world Example alongside the technical description. Checklist state persists locally in your browser, so you can work through it across multiple sessions and track completion as you harden an environment.
+Every one of the 233+ checklist items includes a plain-language Summary and a concrete real-world Example alongside the technical description. Checklist state persists locally in your browser, so you can work through it across multiple sessions and track completion as you harden an environment.
 
 ## Files
 
@@ -46,3 +47,5 @@ Every one of the 217+ checklist items includes a plain-language Summary and a co
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.
+
+A research article based on thoughts by Setvin Noether (@SauerNinja).
