@@ -267,7 +267,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
   outline:2px solid var(--green); outline-offset:2px;
 }
 
-.wrap{max-width:960px; margin:0 auto; padding:0 20px; position:relative; z-index:2;}
+.wrap{max-width:960px; margin:0 auto; padding:0 clamp(20px, 5vw, 56px); position:relative; z-index:2;}
 
 /* ---------- Header ---------- */
 header.site{
@@ -544,13 +544,13 @@ footer.site a{color:var(--green-dim);}
       </div>
       <p class="section-sub">Before any tooling runs, the boundaries of the engagement need to be explicit and written down — this is what keeps a defensive assessment from becoming an incident.</p>
 
-      
+      <div class="check-item">
         <input type="checkbox" id="c1-1"><label for="c1-1">
           <span class="item-title">Define legal boundaries &amp; rules of engagement (RoE)</span>
           <span class="item-body">Written authorization, explicit in-scope/out-of-scope asset lists, and an emergency stop contact who can be reached at any hour of the test window. Without this, even a well-intentioned scan can be indistinguishable from a real intrusion to the SOC on the other end, triggering a costly false-positive incident response.</span>
         <span class="item-extra"><b>Summary</b>Get it in writing before you touch anything: who approved this, what's off-limits, and who to call if something breaks.</span><span class="item-extra"><b>Example</b>A signed scope letter naming IP ranges 10.0.4.0/24 and 10.0.5.0/24 as in-scope, with the CISO's cell number as the emergency contact.</span></label>
       </div>
-      
+      <div class="check-item">
         <input type="checkbox" id="c1-2"><label for="c1-2">
           <span class="item-title">Inventory third-party SaaS, cloud-tenant, and vendor integrations</span>
           <span class="item-body">Confirm each connected vendor (identity providers, RMM tools, analytics platforms) is either in scope with separate authorization or explicitly excluded. A vendor left out of scope but still reachable from tested systems can turn a contained assessment into an unauthorized third-party breach.</span>
