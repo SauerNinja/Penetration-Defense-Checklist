@@ -98,8 +98,8 @@ gtag('config', 'G-TPQ7SHBJRN');
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://sauerninja.github.io/Penetration-Defense-Checklist/" },
   "keywords": "penetration testing checklist, cyber defense checklist, critical infrastructure security, CISA KEV, MITRE D3FEND, NIST CSF 2.0, OWASP, nation-state hacking",
   "articleSection": "Cybersecurity",
-  "wordCount": 21800,
-  "timeRequired": "PT78M"
+  "wordCount": 32800,
+  "timeRequired": "PT116M"
 }
 </script>
 <script type="application/ld+json">
@@ -159,7 +159,13 @@ gtag('config', 'G-TPQ7SHBJRN');
     { "@type": "HowToStep", "position": 14, "name": "Email & Communications Security", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s14" },
     { "@type": "HowToStep", "position": 15, "name": "Data Classification & Encryption", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s15" },
     { "@type": "HowToStep", "position": 16, "name": "Zero Trust Network Access & Passwordless Authentication", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s16" },
-    { "@type": "HowToStep", "position": 17, "name": "Wireless Network & RF Security", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s17" }
+    { "@type": "HowToStep", "position": 17, "name": "Wireless Network & RF Security", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s17" },
+    { "@type": "HowToStep", "position": 18, "name": "Secrets, Configuration & Change Management", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s18" },
+    { "@type": "HowToStep", "position": 19, "name": "Insider Threat & Personnel Security", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s19" },
+    { "@type": "HowToStep", "position": 20, "name": "Regulatory Compliance Mapping", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s20" },
+    { "@type": "HowToStep", "position": 21, "name": "Business Continuity & Disaster Recovery", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s21" },
+    { "@type": "HowToStep", "position": 22, "name": "Incident & Crisis Management", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s22" },
+    { "@type": "HowToStep", "position": 23, "name": "Nation-State Threat Actor Profiles", "url": "https://sauerninja.github.io/Penetration-Defense-Checklist/#s23" }
   ]
 }
 </script>
@@ -223,7 +229,7 @@ body{
   background:var(--bg);
   color:var(--ink);
   font-family:var(--mono);
-  line-height:1.65;
+  line-height:1.75;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -267,16 +273,15 @@ nav.top a{color:var(--ink-dim); margin-left:18px; font-size:0.85rem; text-decora
 nav.top a:hover{color:var(--green);}
 
 /* ---------- Hero ---------- */
-.hero{position:relative; overflow:hidden; border-bottom:1px solid var(--border);}
-.hero-img-wrap{position:relative; width:100%; aspect-ratio:1568/588; overflow:hidden;}
+.hero{position:relative; border-bottom:1px solid var(--border); background:#03060a;}
+.hero-img-wrap{position:relative; width:100%; max-height:70vh; overflow:hidden;}
 .hero-img-wrap img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.1);}
 .hero-scrim{
   position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(4,7,10,0.15) 0%, rgba(4,7,10,0.55) 55%, rgba(4,7,10,0.96) 100%),
-             linear-gradient(90deg, rgba(4,7,10,0.85) 0%, rgba(4,7,10,0.15) 55%);
+  background:linear-gradient(180deg, rgba(4,7,10,0.05) 0%, rgba(4,7,10,0.35) 75%, rgba(4,7,10,0.9) 100%);
 }
 .hero-content{
-  position:absolute; left:0; right:0; bottom:0; padding:34px 0 30px;
+  padding:30px 0 34px;
 }
 .eyebrow{
   color:var(--green); font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase;
@@ -288,14 +293,14 @@ h1{
   font-size:clamp(1.8rem, 4.4vw, 3.1rem); margin:14px 0 10px; color:#e9ffe6;
   letter-spacing:-0.01em; text-shadow:0 0 18px rgba(57,255,20,0.25);
 }
-.hero p.lede{color:var(--ink); max-width:640px; font-size:1.02rem;}
+.hero p.lede{color:var(--ink); max-width:680px; font-size:1.02rem;}
 .hero-meta{display:flex; gap:18px; flex-wrap:wrap; margin-top:16px; font-size:0.82rem; color:var(--ink-dim);}
 .hero-meta span::before{content:"// "; color:var(--green-dim);}
 
 /* ---------- Sections ---------- */
 main{position:relative; z-index:2;}
 .intro{padding:40px 0 10px;}
-.intro p{color:var(--ink); max-width:760px;}
+.intro p{color:var(--ink); max-width:760px; margin-bottom:22px; line-height:1.8;}
 .stat-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:26px 0;}
 .stat{
   border:1px solid var(--border); background:var(--card); padding:14px 16px; border-radius:3px;
@@ -333,19 +338,19 @@ main{position:relative; z-index:2;}
 @media (max-width:600px){.toc ol{columns:1;}}
 
 section.checklist-section{
-  padding:44px 0 6px; border-top:1px solid var(--border); scroll-margin-top:70px;
+  padding:64px 0 12px; border-top:1px solid var(--border); scroll-margin-top:70px;
 }
 .section-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;}
 .section-num{color:var(--green-dim); font-size:0.9rem;}
 .section-head h2{font-size:1.5rem; color:#eafcE6; margin:0;}
-.section-sub{color:var(--ink-dim); max-width:720px; margin:10px 0 22px; font-size:0.94rem;}
+.section-sub{color:var(--ink-dim); max-width:720px; margin:16px 0 34px; font-size:0.94rem; line-height:1.75;}
 .framework-tag{
   display:inline-block; font-size:0.7rem; letter-spacing:0.04em; color:var(--bg);
   background:var(--green-dim); padding:2px 7px; border-radius:2px; margin-left:8px; vertical-align:middle;
 }
 
 .check-item{
-  display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-bottom:1px dashed var(--border);
+  display:flex; gap:14px; align-items:flex-start; padding:26px 0; border-bottom:1px dashed var(--border);
 }
 .check-item:last-child{border-bottom:none;}
 .check-item input[type=checkbox]{
@@ -357,15 +362,15 @@ section.checklist-section{
   content:"✓"; position:absolute; left:3px; top:-3px; color:#04220a; font-size:14px; font-weight:900;
 }
 .check-item label{cursor:pointer; flex:1;}
-.check-item .item-title{color:#eafcE6; font-weight:600; display:block; margin-bottom:3px;}
+.check-item .item-title{color:#eafcE6; font-weight:600; display:block; margin-bottom:8px; line-height:1.5;}
 .check-item.done .item-title, .check-item.done .item-body{opacity:0.5; text-decoration:line-through; text-decoration-color:var(--green-dim);}
-.check-item .item-body{color:var(--ink-dim); font-size:0.9rem;}
+.check-item .item-body{color:var(--ink-dim); font-size:0.9rem; line-height:1.75; display:block;}
 .item-extra{
-  display:block; margin-top:8px; padding:8px 12px; background:#061206; border-left:2px solid var(--green-dim);
-  border-radius:0 3px 3px 0; font-size:0.85rem; color:var(--ink);
+  display:block; margin-top:14px; padding:14px 16px; background:#061206; border-left:2px solid var(--green-dim);
+  border-radius:0 3px 3px 0; font-size:0.85rem; color:var(--ink); line-height:1.65;
 }
-.item-extra b{color:var(--green); font-weight:700; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; display:block; margin-bottom:2px;}
-.item-extra + .item-extra{margin-top:6px;}
+.item-extra b{color:var(--green); font-weight:700; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; display:block; margin-bottom:6px;}
+.item-extra + .item-extra{margin-top:12px;}
 .check-item.done .item-extra{opacity:0.5;}
 .check-item code{
   background:#081408; color:#a8ffa0; padding:1px 5px; border-radius:2px; font-size:0.85em; border:1px solid var(--border);
@@ -421,6 +426,12 @@ footer.site a{color:var(--green-dim);}
 }
 #cookie-banner button:hover{background:#baffb0;}
 
+@media (max-width:640px){
+  .hero-img-wrap{max-height:40vh;}
+  .toc ol{columns:1;}
+  .source-grid{grid-template-columns:1fr;}
+  .stat-row{grid-template-columns:repeat(2,1fr);}
+}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
   #matrix-canvas{display:none;}
@@ -459,22 +470,21 @@ footer.site a{color:var(--green-dim);}
       <p class="lede">American hospitals, water utilities, energy grids, telecoms, and companies of every size are being hit by state-linked hackers out of China, Russia, Iran, and North Korea — right now, not hypothetically. This is a free, source-linked checklist to help defenders close the doors those attacks actually walk through.</p>
       <div class="hero-meta">
         <span>MIT Licensed</span>
-        <span>~78 min read</span>
-        <span>17 sections · 170+ checklist items</span>
+        <span>~116 min read</span>
+        <span>23 sections · 230+ checklist items</span>
       </div>
     </div>
   </div>
 </div>
 
-<main>
-  <div class="wrap">
+<main>  <div class="wrap">
     <section class="intro">
       <p>Over the past two years, foreign state-linked hacking groups and the ransomware crews operating with their tolerance have breached U.S. telecoms, hospitals, water utilities, energy infrastructure, and companies large and small — not as isolated incidents, but as a sustained, ongoing campaign. A Chinese state-sponsored group sat inside American telecom networks for months, reading call records and intercepting communications tied to government and political activity. Russian and Iranian-linked actors have gone after water treatment plants, power infrastructure, and hospitals, sometimes for espionage, sometimes just to prove they could. None of these intrusions required something exotic. They started with an exposed industrial controller still running its factory-default password, an edge device that hadn't been patched, a phished credential, or a vendor with weak controls sitting inside a network it shouldn't have had that much access to.</p>
       <p>This checklist exists because the people responsible for defending American infrastructure and companies — IT teams, security engineers, small-business owners without a dedicated security staff — deserve a resource that treats this as the serious, ongoing problem it is, without requiring a six-figure consulting budget to act on it. Every item below starts from a real, documented attack pattern and ends at a concrete, checkable control, sourced to CISA, MITRE, NIST, or OWASP rather than a blog post. Work it top to bottom before your organization becomes the next line item in a breach report, or jump straight to the section that matches what you're responsible for hardening today.</p>
 
       <div class="stat-row">
-        <div class="stat"><span class="n">17</span><span class="l">Sections</span></div>
-        <div class="stat"><span class="n">170+</span><span class="l">Checklist Items</span></div>
+        <div class="stat"><span class="n">23</span><span class="l">Sections</span></div>
+        <div class="stat"><span class="n">230+</span><span class="l">Checklist Items</span></div>
         <div class="stat"><span class="n">10+</span><span class="l">Sources &amp; Tools</span></div>
         <div class="stat"><span class="n">39</span><span class="l">Foreign-Linked Incidents Cited</span></div>
       </div>
@@ -508,6 +518,12 @@ footer.site a{color:var(--green-dim);}
         <li><a href="#s15">Data Classification &amp; Encryption</a></li>
         <li><a href="#s16">Zero Trust Network Access &amp; Passwordless Authentication</a></li>
         <li><a href="#s17">Wireless Network &amp; RF Security</a></li>
+        <li><a href="#s18">Secrets, Configuration &amp; Change Management</a></li>
+        <li><a href="#s19">Insider Threat &amp; Personnel Security</a></li>
+        <li><a href="#s20">Regulatory Compliance Mapping</a></li>
+        <li><a href="#s21">Business Continuity &amp; Disaster Recovery</a></li>
+        <li><a href="#s22">Incident &amp; Crisis Management</a></li>
+        <li><a href="#s23">Nation-State Threat Actor Profiles</a></li>
       </ol>
     </nav>
 
@@ -548,6 +564,27 @@ footer.site a{color:var(--green-dim);}
           <span class="item-title">Confirm insurance and breach-notification obligations before testing begins</span>
         <span class="item-body">Cyber-insurance policies frequently contain strict, time-bound notification clauses, and several U.S. states now carry statutory breach-reporting deadlines independent of any insurance contract. Many cyber-insurance policies contain notification-window clauses that voids coverage if missed, and some U.S. states now carry statutory breach-reporting deadlines as short as 72 hours.</span>
         <span class="item-extra"><b>Summary</b>Cyber-insurance policies and some state/federal regulations require notification within specific windows — know those deadlines before an incident forces you to look them up.</span><span class="item-extra"><b>Example</b>Cyber insurance may require notifying the insurer within 24-72 hours of a suspected incident or coverage can be denied — check your policy's actual language now, not during a breach.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c1-6"><label for="c1-6">
+          <span class="item-title">Establish a communication plan for what happens if the assessment finds something actively being exploited</span>
+          <span class="item-body">Discovering active compromise mid-assessment changes the engagement from a scheduled test into a live incident, and without a pre-agreed escalation path, precious response time is lost figuring out who to call.</span>
+        <span class="item-extra"><b>Summary</b>If you find evidence of an existing intrusion, stop and escalate immediately rather than continue testing — decide this in advance, in writing.</span><span class="item-extra"><b>Example</b>A pre-signed agreement stating that any sign of active compromise found during testing triggers an immediate call to the CISO and pause of further testing, rather than continuing per the original test plan.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c1-7"><label for="c1-7">
+          <span class="item-title">Confirm who has legal authority to approve testing against shared or leased infrastructure</span>
+          <span class="item-body">Testing against cloud infrastructure, a leased data center rack, or a co-located environment can violate the hosting provider's own terms of service even with your own organization's full authorization.</span>
+        <span class="item-extra"><b>Summary</b>Check whether your cloud provider or hosting company requires its own separate advance notice before you run security tests against infrastructure they own.</span><span class="item-extra"><b>Example</b>AWS, Azure, and GCP each have their own penetration testing policies; confirm your planned testing against cloud-hosted assets doesn't require separate provider notification before scanning begins.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c1-8"><label for="c1-8">
+          <span class="item-title">Require a lightweight threat model before launching any major new feature or system</span>
+          <span class="item-body">Threat modeling done at design time catches entire classes of vulnerability before a single line of code is written, when the fix is a design change rather than an expensive post-launch patch.</span>
+        <span class="item-extra"><b>Summary</b>Before building something new, spend an hour asking 'how could this be attacked' and design around the answers, instead of testing for it only after launch.</span><span class="item-extra"><b>Example</b>A 1-hour STRIDE-based threat modeling session before building a new payment feature, identifying that a proposed API needs rate limiting before any code is written.</span>
+        </label>
       </div>
     </section>
 
@@ -612,6 +649,13 @@ footer.site a{color:var(--green-dim);}
           <span class="item-title">Passively harvest employee emails and metadata before assuming social engineering risk is low</span>
         <span class="item-body">The same open-source intelligence techniques used to build a phishing target list can be run defensively to measure exactly how exposed your own staff already are. If this information is easy for you to gather, it was easy for an attacker too, and it directly informs how convincing their phishing pretext will be.</span>
         <span class="item-extra"><b>Summary</b>The same OSINT techniques attackers use to build a phishing target list can be run defensively to see how exposed your staff already are.</span><span class="item-extra"><b>Example</b>Running theHarvester or a similar OSINT tool against your own domain surfaces 40 employee emails and job titles scraped from LinkedIn and old PDFs.</span></label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c2-10"><label for="c2-10">
+          <span class="item-title">Enable DNSSEC on all authoritative domains to prevent DNS response spoofing</span>
+          <span class="item-body">Without DNSSEC, DNS responses can be forged in transit, redirecting users to attacker-controlled infrastructure while the domain owner's actual DNS records remain untouched and correct.</span>
+        <span class="item-extra"><b>Summary</b>Add a cryptographic signature to your DNS records so it's much harder for someone to secretly redirect your domain's traffic without you knowing.</span><span class="item-extra"><b>Example</b>Enable DNSSEC signing through your DNS provider and verify it validates correctly using a tool like DNSViz before considering the rollout complete.</span>
+        </label>
       </div>
     </section>
 
@@ -937,6 +981,13 @@ footer.site a{color:var(--green-dim);}
         <span class="item-extra"><b>Summary</b>There's a free, official numbered checklist just for hardening containers and Kubernetes — use it instead of guessing at settings.</span><span class="item-extra"><b>Example</b>Run kube-bench against your cluster, which automatically checks it against the official CIS Kubernetes Benchmark and reports exactly which numbered controls fail.</span>
         </label>
       </div>
+      <div class="check-item">
+        <input type="checkbox" id="c6-13"><label for="c6-13">
+          <span class="item-title">Enforce network egress filtering to block unexpected outbound connections from cloud workloads</span>
+          <span class="item-body">Most cloud security focuses on inbound traffic, but unrestricted outbound access is exactly what lets a compromised workload exfiltrate data or reach a command-and-control server without ever triggering an inbound-focused control.</span>
+        <span class="item-extra"><b>Summary</b>Restrict what your cloud servers are allowed to connect out to, not just what's allowed to connect in.</span><span class="item-extra"><b>Example</b>Configure security groups so a database server can only reach the specific internal services it needs, blocking unrestricted outbound internet access that a compromised instance could otherwise use to exfiltrate data.</span>
+        </label>
+      </div>
     </section>
 
     <!-- ============ SECTION 7 ============ -->
@@ -1146,6 +1197,20 @@ getcap -r / 2>/dev/null</code></pre> Waiting to detect exploitation means the at
           <span class="item-title">Reference NIST SP 800-61 for the authoritative federal incident-handling process</span>
           <span class="item-body">Rather than improvising an incident response plan, NIST publishes a detailed, freely available guide covering preparation, detection, containment, and recovery. Following an established process also matters for legal and insurance purposes — demonstrating a documented, standard response process can materially affect liability and coverage outcomes after an incident.</span>
         <span class="item-extra"><b>Summary</b>Don't write your incident response plan from scratch — a free, authoritative government template already exists.</span><span class="item-extra"><b>Example</b>Structure your incident response runbook around NIST SP 800-61's four phases (Preparation; Detection & Analysis; Containment, Eradication & Recovery; Post-Incident Activity) instead of building one from scratch.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c8-19"><label for="c8-19">
+          <span class="item-title">Track the CISA Shields Up guidance level for heightened-threat operational posture changes</span>
+          <span class="item-body">During periods of elevated geopolitical tension, CISA periodically issues heightened-posture guidance recommending specific, temporary defensive measures beyond baseline practice.</span>
+        <span class="item-extra"><b>Summary</b>Watch for official government guidance recommending extra precautions during periods of heightened international tension, and actually act on it.</span><span class="item-extra"><b>Example</b>During a period of elevated nation-state threat activity, temporarily lower the threshold for anomaly-detection alerts and require additional approval for privileged access changes, per current CISA guidance.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c8-20"><label for="c8-20">
+          <span class="item-title">Report cyber risk to executive leadership and the board using consistent, business-relevant metrics</span>
+          <span class="item-body">Technical metrics like 'patches applied' mean little to a board; framing risk in terms of financial exposure, regulatory exposure, and trend over time is what actually drives resourcing decisions at the leadership level.</span>
+        <span class="item-extra"><b>Summary</b>Translate security metrics into terms leadership actually cares about — financial risk and trend lines — rather than raw technical counts.</span><span class="item-extra"><b>Example</b>A quarterly board report showing mean time to patch critical vulnerabilities trending down, phishing simulation click-rate trending down, and estimated financial exposure from top unresolved risks.</span>
         </label>
       </div>
     </section>
@@ -1516,6 +1581,20 @@ getcap -r / 2>/dev/null</code></pre> Waiting to detect exploitation means the at
         <span class="item-extra"><b>Summary</b>For sensitive travel, use a stripped-down loaner device with minimal data instead of your everyday laptop or phone.</span><span class="item-extra"><b>Example</b>Issue a factory-reset laptop with only essential accounts logged in for travel to high-risk regions, wiped and re-imaged upon return.</span>
         </label>
       </div>
+      <div class="check-item">
+        <input type="checkbox" id="c11-6"><label for="c11-6">
+          <span class="item-title">Enforce remote-wipe capability and confirm it actually works before a device is lost</span>
+          <span class="item-body">A remote-wipe policy that's never been tested is a false sense of security — some devices fail to receive the wipe command if they're offline, factory-reset, or have the management profile removed.</span>
+        <span class="item-extra"><b>Summary</b>Test that you can actually remotely erase company data from a lost phone before you actually need to rely on that feature in an emergency.</span><span class="item-extra"><b>Example</b>Periodically test remote wipe against a spare enrolled device to confirm the command actually executes within a reasonable time window, not just that the policy exists in the MDM console.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c11-7"><label for="c11-7">
+          <span class="item-title">Restrict corporate app installation to an approved allowlist on managed devices</span>
+          <span class="item-body">Sideloaded or unapproved apps on a managed device can request broad permissions and exfiltrate data through a channel your MDM policy never anticipated.</span>
+        <span class="item-extra"><b>Summary</b>Only let approved apps be installed on company-managed phones, rather than trusting every app in the public store equally.</span><span class="item-extra"><b>Example</b>Configure your MDM to block installation of apps outside an approved list on corporate-enrolled devices, particularly ones with excessive permission requests like full contact or SMS access.</span>
+        </label>
+      </div>
     </section>
 
     <!-- ============ SECTION 12 ============ -->
@@ -1552,6 +1631,20 @@ getcap -r / 2>/dev/null</code></pre> Waiting to detect exploitation means the at
           <span class="item-title">Secure server rooms and network closets with access logging separate from general office badges</span>
           <span class="item-body">Physical access to a server room or a network closet with an exposed vendor-installed modem is often all it takes to bypass every network control you've built. The same badge that grants general building access often shouldn't grant server-room access at all, since the two represent fundamentally different levels of risk if compromised.</span>
         <span class="item-extra"><b>Summary</b>Server rooms need their own access list and log, separate from the general office badge system — not everyone with building access should get in.</span><span class="item-extra"><b>Example</b>A server room that requires a second, separately-issued badge plus a logged entry, so IT can immediately audit exactly who's been inside and when.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c12-5"><label for="c12-5">
+          <span class="item-title">Require visitor sign-in with escort for any area beyond a designated public lobby</span>
+          <span class="item-body">An unescorted visitor with a plausible reason to be in the building (a delivery, a job interview, a vendor visit) is a well-documented pretext for physical social-engineering attacks.</span>
+        <span class="item-extra"><b>Summary</b>Don't let visitors wander unescorted past the lobby, even ones who seem to have a legitimate reason to be there.</span><span class="item-extra"><b>Example</b>A visitor management system that logs entry/exit times and requires an employee escort for anyone beyond the reception area, with badges that visually distinguish visitors from staff.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c12-6"><label for="c12-6">
+          <span class="item-title">Shred or securely destroy physical documents containing sensitive data before disposal</span>
+          <span class="item-body">Dumpster diving remains a viable, low-tech reconnaissance technique, and printed documents containing account numbers, org charts, or credentials handed to a regular trash service are effectively public.</span>
+        <span class="item-extra"><b>Summary</b>Don't just throw away sensitive paperwork — shred it, or use a locked bin collected by a certified destruction service.</span><span class="item-extra"><b>Example</b>Place locked shred bins near printers in areas handling sensitive paperwork, serviced by a certified document-destruction vendor rather than routed to general office trash.</span>
         </label>
       </div>
     </section>
@@ -1597,6 +1690,13 @@ getcap -r / 2>/dev/null</code></pre> Waiting to detect exploitation means the at
           <span class="item-title">Require a Software Bill of Materials (SBOM) from major software vendors as a contract condition</span>
           <span class="item-body">An SBOM is a complete, machine-readable inventory of every component and dependency inside a piece of software, the same visibility that would have flagged XZ Utils exposure in minutes rather than days.</span>
         <span class="item-extra"><b>Summary</b>Ask vendors for a list of every open-source component in their product, not just a summary — so you can react fast when a component like Log4j turns out to be vulnerable.</span><span class="item-extra"><b>Example</b>Require vendors of critical software to provide an SBOM in a standard format like SPDX or CycloneDX, and check new deliveries against it before deployment.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c13-6"><label for="c13-6">
+          <span class="item-title">Build security requirements into the RFP and procurement process before a vendor is selected</span>
+          <span class="item-body">Security requirements added after a vendor contract is already signed have far less negotiating leverage than requirements built into the original RFP, when competing vendors are still trying to win the business.</span>
+        <span class="item-extra"><b>Summary</b>Ask about security before you pick a vendor, not after you've already signed the contract, when you have the most leverage to actually require changes.</span><span class="item-extra"><b>Example</b>Include a mandatory security questionnaire and minimum SOC 2 requirement in the RFP itself, scoring vendor responses as part of the selection criteria, not as a follow-up after the decision is made.</span>
         </label>
       </div>
     </section>
@@ -1734,6 +1834,20 @@ getcap -r / 2>/dev/null</code></pre> Waiting to detect exploitation means the at
         <span class="item-extra"><b>Summary</b>Keep checking whether a login still looks legitimate throughout the session, not just at the moment someone first logs in.</span><span class="item-extra"><b>Example</b>A session that starts in New York and suddenly shows activity from an IP address in another country an hour later triggers an automatic re-authentication challenge or session termination.</span>
         </label>
       </div>
+      <div class="check-item">
+        <input type="checkbox" id="c16-6"><label for="c16-6">
+          <span class="item-title">Retire legacy VPN concentrators once ZTNA coverage is confirmed complete across all remote-access use cases</span>
+          <span class="item-body">Running both a legacy VPN and a ZTNA solution in parallel indefinitely doubles the attack surface instead of replacing it, since the legacy VPN concentrator remains a viable target as long as it's still reachable.</span>
+        <span class="item-extra"><b>Summary</b>Actually turn off the old VPN system once the new access method covers everyone, instead of leaving both running side by side forever.</span><span class="item-extra"><b>Example</b>Set a hard cutover date for decommissioning the legacy VPN concentrator once ZTNA policies are confirmed to cover 100% of remote-access use cases, rather than leaving it running indefinitely as a fallback.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c16-7"><label for="c16-7">
+          <span class="item-title">Run periodic purple team exercises pairing offensive and defensive teams to validate detection coverage together</span>
+          <span class="item-body">A traditional red team engagement tests whether an attack succeeds; a purple team exercise adds the defensive team working alongside it in real time, turning every successful technique into an immediate, concrete detection-engineering improvement instead of a report read weeks later.</span>
+        <span class="item-extra"><b>Summary</b>Have your attack-simulation team and your detection team work together in the same room, so gaps get fixed on the spot instead of just written up in a report.</span><span class="item-extra"><b>Example</b>A quarterly purple team session where the red team executes a specific ATT&CK technique and the blue team confirms in real time whether it was detected, immediately tuning alerting rules for anything missed.</span>
+        </label>
+      </div>
     </section>
 
     <!-- ============ SECTION 17 ============ -->
@@ -1781,6 +1895,409 @@ getcap -r / 2>/dev/null</code></pre> Waiting to detect exploitation means the at
       </div>
     </section>
 
+    <!-- ============ SECTION 18 ============ -->
+    <section class="checklist-section" id="s18">
+      <div class="section-head">
+        <span class="section-num">18</span>
+        <h2>Secrets, Configuration &amp; Change Management</h2>
+      </div>
+      <p class="section-sub">The Sisense and Halliburton incidents referenced elsewhere in this checklist both trace back to configuration and secrets-handling failures, not exotic exploits. This section covers the unglamorous plumbing that most breaches actually run through.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c18-1"><label for="c18-1">
+          <span class="item-title">Store all secrets in a dedicated secrets manager, never in code or config files</span>
+          <span class="item-body">A secret hardcoded into source code or a plaintext config file is exposed to anyone with read access to that repository or server, permanently, until someone notices and rotates it — a dedicated secrets manager centralizes access control, rotation, and audit logging instead.</span>
+        <span class="item-extra"><b>Summary</b>Keep passwords and API keys in a dedicated tool built for that purpose, never typed directly into your code or config files.</span><span class="item-extra"><b>Example</b>Migrate database credentials out of a <code>.env</code> file checked into git and into HashiCorp Vault or AWS Secrets Manager, with automatic rotation on a schedule.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c18-2"><label for="c18-2">
+          <span class="item-title">Scan container images for known vulnerabilities before deployment, not just at build time</span>
+          <span class="item-body">A container image that was clean when built can become vulnerable the moment a new CVE is disclosed for one of its base-image dependencies — scanning needs to happen continuously against the registry, not just once during the CI pipeline.</span>
+        <span class="item-extra"><b>Summary</b>Regularly check container images for known security holes, not just when they're first built, since new vulnerabilities get discovered in old images all the time.</span><span class="item-extra"><b>Example</b>Run Trivy or Grype against every image in your container registry on a nightly schedule, and block deployment of any image with a critical unpatched CVE.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c18-3"><label for="c18-3">
+          <span class="item-title">Enforce security response headers (CSP, HSTS, X-Frame-Options) on every public-facing site</span>
+          <span class="item-body">These headers are a free, server-side control that meaningfully reduces the impact of an XSS bug, clickjacking attempt, or protocol-downgrade attack, yet they're routinely left at browser defaults because they require no visible functionality to justify implementing them.</span>
+        <span class="item-extra"><b>Summary</b>Turn on a handful of free browser security settings on your website that limit the damage even if another bug slips through.</span><span class="item-extra"><b>Example</b>Set a Content-Security-Policy header restricting which domains can execute scripts on your site, and HSTS to force HTTPS — check both with securityheaders.com, a free scanner.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c18-4"><label for="c18-4">
+          <span class="item-title">Define and enforce a patch management SLA by severity, and track compliance against it</span>
+          <span class="item-body">"Patch when convenient" isn't a policy — without a documented, enforced timeline tied to severity, critical patches routinely sit unapplied for months because no one is specifically accountable for the delay.</span>
+        <span class="item-extra"><b>Summary</b>Set a written deadline for how fast different severity levels of security patches must be applied, and actually track whether that deadline is being met.</span><span class="item-extra"><b>Example</b>A policy requiring critical KEV-listed vulnerabilities to be patched within 72 hours, high severity within 2 weeks, tracked on a dashboard reviewed monthly by IT leadership.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c18-5"><label for="c18-5">
+          <span class="item-title">Detect and alert on unauthorized configuration drift in production systems</span>
+          <span class="item-body">A production system's configuration silently drifting away from its known-good, version-controlled baseline is often the first sign of either an authorized-but-undocumented change or an unauthorized one — either way, it needs to be visible, not discovered by accident.</span>
+        <span class="item-extra"><b>Summary</b>Get alerted automatically when a server's settings change from what they're supposed to be, instead of finding out by accident later.</span><span class="item-extra"><b>Example</b>Use a tool like AWS Config or Chef InSpec to alert when a production firewall rule changes outside of your normal change-management process.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c18-6"><label for="c18-6">
+          <span class="item-title">Maintain a current inventory of end-of-life and end-of-support software across the environment</span>
+          <span class="item-body">Software past its vendor-supported end-of-life stops receiving security patches entirely, meaning any newly discovered vulnerability in it will never be fixed no matter how severe, yet it often remains in production simply because no one is tracking support-status dates.</span>
+        <span class="item-extra"><b>Summary</b>Keep a list of every piece of software you run and when it stops getting security updates, so nothing quietly becomes permanently unpatchable.</span><span class="item-extra"><b>Example</b>A dashboard tracking every server's OS and major software version against each vendor's published end-of-support date, flagging anything within 6 months of losing patch support.</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 19 ============ -->
+    <section class="checklist-section" id="s19">
+      <div class="section-head">
+        <span class="section-num">19</span>
+        <h2>Insider Threat &amp; Personnel Security</h2>
+      </div>
+      <p class="section-sub">The staffer who transferred sensitive files to a personal laptop in Section 9 didn't need to be malicious to cause a serious breach — this section covers the human side of the security program, from hiring through offboarding.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c19-1"><label for="c19-1">
+          <span class="item-title">Conduct background checks proportional to role sensitivity before granting privileged access</span>
+          <span class="item-body">Not every role needs the same level of screening, but any role with standing access to sensitive data, financial systems, or critical infrastructure warrants more than a resume review before that access is granted.</span>
+        <span class="item-extra"><b>Summary</b>Screen people more carefully before giving them access to sensitive systems, proportional to how much access they'll actually have.</span><span class="item-extra"><b>Example</b>Require a background check before granting domain admin or financial-system access, even for an internal transfer who's already passed a lighter screening for their original role.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c19-2"><label for="c19-2">
+          <span class="item-title">Enforce same-day account deprovisioning on termination, with no exceptions process</span>
+          <span class="item-body">A delayed offboarding process is a well-documented insider-threat window — access that should have been revoked immediately remains usable for days or weeks in organizations without a strict, automated same-day deprovisioning requirement.</span>
+        <span class="item-extra"><b>Summary</b>Cut off a departing employee's access the same day they leave, automatically, not whenever IT gets around to it.</span><span class="item-extra"><b>Example</b>Integrate your HR system with your identity provider so an employee marked "terminated" in HR automatically disables all their accounts within the hour, not the next IT ticket cycle.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c19-3"><label for="c19-3">
+          <span class="item-title">Monitor privileged-user activity with the same rigor applied to external threat detection</span>
+          <span class="item-body">Detection programs frequently focus entirely on external attackers while giving comparatively little scrutiny to anomalous behavior from already-authenticated, already-trusted privileged accounts, exactly the accounts capable of the most damage if compromised or misused.</span>
+        <span class="item-extra"><b>Summary</b>Apply the same kind of anomaly detection to your own admins and privileged users that you'd apply to an outside attacker.</span><span class="item-extra"><b>Example</b>Alert when a privileged account accesses an unusually large volume of customer records outside their normal job function, the same way you'd flag anomalous external access.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c19-4"><label for="c19-4">
+          <span class="item-title">Run periodic access reviews to remove accumulated, unused permissions</span>
+          <span class="item-body">Permissions accumulate over time as people change roles, take on temporary projects, or get access "just in case" — without a recurring review, most accounts end up holding far more access than their current job actually requires.</span>
+        <span class="item-extra"><b>Summary</b>Regularly check whether people still need the access they have, and remove what's built up over time but is no longer necessary.</span><span class="item-extra"><b>Example</b>A quarterly access review where every manager confirms their direct reports' system permissions are still appropriate, with automatic revocation for anything unconfirmed after 30 days.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c19-5"><label for="c19-5">
+          <span class="item-title">Maintain a confidential channel for employees to report security concerns without fear of retaliation</span>
+          <span class="item-body">Employees are frequently the first to notice a suspicious coworker, a phishing attempt that got through, or a process that doesn't feel right, but only if there's a clear, safe, and genuinely confidential way to report it.</span>
+        <span class="item-extra"><b>Summary</b>Give staff an actual, trusted way to flag security concerns quietly, without worrying it will come back on them.</span><span class="item-extra"><b>Example</b>A confidential reporting line or anonymous form, separate from the normal management chain, specifically for reporting suspected security incidents or policy violations.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c19-6"><label for="c19-6">
+          <span class="item-title">Require a formal, signed acceptable-use policy acknowledgment from every employee with system access</span>
+          <span class="item-body">A documented, signed policy sets a clear, enforceable expectation and gives HR and legal a concrete basis to act on if that expectation is violated, rather than relying on an assumed shared understanding.</span>
+        <span class="item-extra"><b>Summary</b>Have every employee formally read and sign off on the rules for using company systems, so expectations are clear and enforceable.</span><span class="item-extra"><b>Example</b>New hires sign an acceptable-use policy during onboarding covering personal device use, data handling, and reporting obligations, re-acknowledged annually as policy updates.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c19-7"><label for="c19-7">
+          <span class="item-title">Measure security awareness program effectiveness with tracked metrics, not just completion rates</span>
+          <span class="item-body">A 100% training-completion rate says nothing about whether the training actually changed behavior; phishing-simulation click rates and real-world reporting rates are a far better signal of whether the investment is working.</span>
+        <span class="item-extra"><b>Summary</b>Don't just track whether people finished the training video — track whether their actual behavior around phishing and security has improved.</span><span class="item-extra"><b>Example</b>Track phishing simulation click-through rate and report-to-security rate over time as the real measure of program effectiveness, rather than relying solely on training completion percentages.</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 20 ============ -->
+    <section class="checklist-section" id="s20">
+      <div class="section-head">
+        <span class="section-num">20</span>
+        <h2>Regulatory Compliance Mapping</h2>
+      </div>
+      <p class="section-sub">Compliance and security aren't the same thing, but they overlap heavily — and a control built once tends to satisfy several frameworks at the same time if it's mapped deliberately rather than treated as separate, duplicate paperwork.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c20-1"><label for="c20-1">
+          <span class="item-title">Identify every regulatory framework your organization is actually subject to, not just the obvious one</span>
+          <span class="item-body">Organizations frequently comply thoroughly with the one regulation they know about while overlooking a second, less obvious one that also applies, such as a state-level breach notification law layered on top of a federal requirement.</span>
+        <span class="item-extra"><b>Summary</b>Make a complete list of every law or standard your company is actually required to follow, since there's often more than the one everyone already knows about.</span><span class="item-extra"><b>Example</b>A healthcare SaaS company subject to HIPAA as a business associate may also independently trigger PCI DSS if it processes patient payments, and state breach-notification law regardless of either.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c20-2"><label for="c20-2">
+          <span class="item-title">Map HIPAA Security Rule safeguards directly to specific technical controls if you handle protected health information</span>
+          <span class="item-body">The HIPAA Security Rule specifies required administrative, physical, and technical safeguards, but doesn't prescribe exact implementation — leaving many organizations with a compliance checklist that was never actually connected to real technical controls.</span>
+        <span class="item-extra"><b>Summary</b>If you handle health data, connect the legal requirement to an actual technical control, not just a policy document that says you comply.</span><span class="item-extra"><b>Example</b>Map HIPAA's "access control" safeguard to your actual RBAC implementation and MFA enforcement, with evidence you can produce during an audit, not just a policy stating access is controlled.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c20-3"><label for="c20-3">
+          <span class="item-title">Scope and segment the cardholder data environment (CDE) if you process payment cards</span>
+          <span class="item-body">PCI DSS requirements apply in full force to any system that stores, processes, or transmits cardholder data, and to anything else on the same flat network — proper network segmentation is what keeps the compliance scope, and the associated cost and audit burden, manageable.</span>
+        <span class="item-extra"><b>Summary</b>Keep the part of your network that touches credit card data walled off from everything else, so the strict payment-card rules don't apply to your entire network.</span><span class="item-extra"><b>Example</b>Segment your point-of-sale network from general corporate IT with a firewall, so a phishing email in accounting can't reach systems in PCI DSS scope.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c20-4"><label for="c20-4">
+          <span class="item-title">Honor GDPR/CCPA data subject rights requests (access, deletion, portability) within required deadlines</span>
+          <span class="item-body">Privacy regulations increasingly grant individuals enforceable rights over their own data with specific response deadlines, and an organization that can't technically locate all of a person's data across its systems can't reliably meet those deadlines regardless of policy intent.</span>
+        <span class="item-extra"><b>Summary</b>Make sure you can actually find and act on someone's request to see, delete, or export their personal data, within the legal time limit.</span><span class="item-extra"><b>Example</b>Build a documented process to locate and export all data tied to a specific customer across every system within GDPR's one-month response window, tested at least once before it's actually needed.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c20-5"><label for="c20-5">
+          <span class="item-title">Maintain SOX-compliant change management and access controls over financial reporting systems</span>
+          <span class="item-body">For publicly traded companies, unauthorized or undocumented changes to systems that feed financial reporting can become a material control deficiency during an audit, independent of whether any actual fraud or error occurred.</span>
+        <span class="item-extra"><b>Summary</b>If you're a public company, keep a documented, approved trail for every change made to systems that feed your financial statements.</span><span class="item-extra"><b>Example</b>Require documented approval and a segregation-of-duties check before any change to the general ledger system's configuration, with an audit trail an external auditor can review.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c20-6"><label for="c20-6">
+          <span class="item-title">Maintain a documented data processing agreement (DPA) with every sub-processor handling regulated data</span>
+          <span class="item-body">Regulations like GDPR hold you accountable for how your sub-processors handle data too, not just your own systems — an undocumented sub-processor relationship is a compliance gap even if that vendor's security is solid.</span>
+        <span class="item-extra"><b>Summary</b>Get a signed data processing agreement from any vendor that touches regulated personal data on your behalf, not just your direct systems.</span><span class="item-extra"><b>Example</b>A cloud analytics vendor processing EU customer data needs a signed DPA specifying their security obligations and breach-notification duties, reviewed whenever their subprocessor list changes.</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 21 ============ -->
+    <section class="checklist-section" id="s21">
+      <div class="section-head">
+        <span class="section-num">21</span>
+        <h2>Business Continuity &amp; Disaster Recovery</h2>
+      </div>
+      <p class="section-sub">Nearly every ransomware incident referenced throughout this checklist ends the same way operationally: how fast could the organization actually get back to running. This section is about answering that question before the day it matters.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c21-1"><label for="c21-1">
+          <span class="item-title">Define Recovery Time Objective (RTO) and Recovery Point Objective (RPO) for every critical system <span class="framework-tag">ISO 22301</span></span>
+          <span class="item-body">Without a documented, agreed RTO/RPO, "how fast do we need this back" and "how much data loss is acceptable" get decided in the moment during an actual incident, under pressure, rather than calmly in advance with the business owners who actually understand the impact.</span>
+        <span class="item-extra"><b>Summary</b>Decide in advance how quickly each critical system needs to be back up, and how much data loss would be acceptable, rather than figuring it out mid-crisis.</span><span class="item-extra"><b>Example</b>The order-processing system gets a 4-hour RTO and 15-minute RPO; an internal wiki gets a 3-day RTO and 24-hour RPO — different systems justify very different recovery investments.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c21-2"><label for="c21-2">
+          <span class="item-title">Test full disaster recovery failover at least annually, not just backup restoration</span>
+          <span class="item-body">Restoring a single file from backup and actually failing over an entire production environment to a secondary site are very different exercises — many organizations have only ever tested the former and discover the gap only during a real disaster.</span>
+        <span class="item-extra"><b>Summary</b>Actually practice switching your whole operation to a backup site once a year, not just restoring individual files.</span><span class="item-extra"><b>Example</b>Run an annual DR exercise that actually fails production traffic over to the secondary site for a defined window, measuring whether the real RTO matches the documented target.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c21-3"><label for="c21-3">
+          <span class="item-title">Maintain an alternate communication channel independent of primary corporate IT systems</span>
+          <span class="item-body">If email, chat, and the corporate phone system all run through infrastructure that's down or compromised during an incident, the response team has no way to coordinate — a Halliburton-style intrusion can take down the very tools needed to organize the response to it.</span>
+        <span class="item-extra"><b>Summary</b>Have a backup way for your team to communicate that doesn't depend on the same systems that might be down during an incident.</span><span class="item-extra"><b>Example</b>Maintain a Signal group or a phone tree with personal cell numbers for the incident response team, tested periodically, that doesn't rely on corporate email or Slack being available.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c21-4"><label for="c21-4">
+          <span class="item-title">Identify and document manual fallback procedures for critical processes before they're needed</span>
+          <span class="item-body">Nearly every incident referenced in this checklist's Section 9 eventually reverted to pen-and-paper or manual processes — organizations that had actually documented and practiced that fallback recovered measurably faster than those improvising it in real time.</span>
+        <span class="item-extra"><b>Summary</b>Write down and practice how critical work would get done by hand if the computer systems went down, before you actually need to.</span><span class="item-extra"><b>Example</b>A documented manual patient check-in process for a hospital front desk, including printed forms and a paper appointment log, rehearsed during a tabletop exercise rather than improvised during a real EHR outage.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c21-5"><label for="c21-5">
+          <span class="item-title">Review and update the business impact analysis (BIA) at least annually as systems and dependencies change</span>
+          <span class="item-body">A BIA that accurately reflected system dependencies two years ago may be badly out of date after a cloud migration, an acquisition, or a new critical vendor integration, leading to recovery priorities that no longer match actual business risk.</span>
+        <span class="item-extra"><b>Summary</b>Keep your list of "what's actually critical and what depends on what" up to date as your systems change, not frozen from when it was first written.</span><span class="item-extra"><b>Example</b>After migrating a critical application to a new cloud provider, update the BIA to reflect the new dependency chain rather than relying on documentation describing the old on-premises architecture.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c21-6"><label for="c21-6">
+          <span class="item-title">Maintain offline, geographically separate backups immune to a single regional disaster or ransomware sweep</span>
+          <span class="item-body">A backup stored in the same data center or region as production can be destroyed by the same event, natural disaster, regional outage, or ransomware that took down production in the first place.</span>
+        <span class="item-extra"><b>Summary</b>Keep at least one backup copy somewhere physically and logically separate from your main systems, so one disaster can't take out both.</span><span class="item-extra"><b>Example</b>Maintain a backup copy in a different cloud region or an offline vault entirely, so a ransomware sweep that reaches your primary region's connected backups still leaves an untouched copy available.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c21-7"><label for="c21-7">
+          <span class="item-title">Test that backups are actually immutable against a ransomware scenario, not just present</span>
+          <span class="item-body">A backup that a compromised administrator account can delete or encrypt provides no real protection against ransomware — true immutability means even privileged credentials can't alter or remove it within the retention window.</span>
+        <span class="item-extra"><b>Summary</b>Verify your backups genuinely can't be deleted or encrypted by an attacker who's gained admin access, not just that a backup copy technically exists somewhere.</span><span class="item-extra"><b>Example</b>Attempt to delete a test backup using admin credentials against your backup platform's immutability/WORM policy, confirming it's actually enforced rather than just configured.</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 22 ============ -->
+    <section class="checklist-section" id="s22">
+      <div class="section-head">
+        <span class="section-num">22</span>
+        <h2>Incident &amp; Crisis Management</h2>
+      </div>
+      <p class="section-sub">Technical detection and disaster recovery answer "how do we find and fix it." This section answers a separate question: who has authority to make decisions, and how the organization communicates, while an incident is actively unfolding.</p>
+
+      <div class="check-item">
+        <input type="checkbox" id="c22-1"><label for="c22-1">
+          <span class="item-title">Define incident severity tiers with explicit, objective escalation criteria <span class="framework-tag">ISO/IEC 27035</span></span>
+          <span class="item-body">Without agreed-upon severity definitions, every incident gets triaged subjectively in the moment, which routinely means a genuinely critical event gets initially treated as routine simply because the person who first noticed it didn't recognize the scope.</span>
+        <span class="item-extra"><b>Summary</b>Write down in advance what counts as a minor issue versus a major crisis, with clear rules, so severity isn't guessed at during the incident itself.</span><span class="item-extra"><b>Example</b>A Severity 1 definition specifying "confirmed unauthorized access to production customer data" automatically triggers executive notification within 30 minutes, regardless of who discovers it or when.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c22-2"><label for="c22-2">
+          <span class="item-title">Designate a trained Incident Commander role with clear decision-making authority</span>
+          <span class="item-body">During a live incident, having a single person with clear, pre-authorized decision-making power, separate from whoever happens to be the most senior technical responder, prevents the confusion and delay of decisions getting stuck waiting for consensus or an unavailable executive.</span>
+        <span class="item-extra"><b>Summary</b>Name a specific person (and backups) who's allowed to make fast decisions during an incident, instead of everyone waiting for group agreement.</span><span class="item-extra"><b>Example</b>A rotating on-call Incident Commander role, trained specifically in that function, with pre-authorized power to take systems offline without needing separate executive sign-off during a confirmed Severity 1 event.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c22-3"><label for="c22-3">
+          <span class="item-title">Maintain a RACI matrix defining who is Responsible, Accountable, Consulted, and Informed during an incident</span>
+          <span class="item-body">IT, legal, communications, HR, and executive leadership all have real roles during a major incident, but without an explicit RACI matrix, responsibilities overlap or fall through the gaps entirely, usually discovered only when something urgent has no clear owner.</span>
+        <span class="item-extra"><b>Summary</b>Write down exactly which team handles what during an incident, so nothing important falls through the cracks between departments.</span><span class="item-extra"><b>Example</b>A documented RACI showing IT Security as Responsible for containment, the CISO as Accountable for the overall response, Legal as Consulted on notification obligations, and the CEO as Informed at defined milestones.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c22-4"><label for="c22-4">
+          <span class="item-title">Maintain a crisis communications plan covering customers, media, employees, and regulators separately</span>
+          <span class="item-body">Different audiences need different messages, delivered through different channels, on different timelines — a single generic statement drafted under pressure during an actual incident is a common source of legal exposure and reputational damage that a prepared plan avoids.</span>
+        <span class="item-extra"><b>Summary</b>Prepare draft messages in advance for customers, the press, employees, and regulators, tailored to each, rather than writing everything from scratch mid-crisis.</span><span class="item-extra"><b>Example</b>Pre-approved message templates for a data-breach scenario, one for affected customers, one for media inquiries, one for internal staff FAQs, reviewed and legally cleared before they're ever needed.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c22-5"><label for="c22-5">
+          <span class="item-title">Pre-establish legal counsel and law enforcement contact procedures, including CISA and FBI field office details</span>
+          <span class="item-body">Deciding whether and how to involve law enforcement, and which specific breach-counsel firm to call, is a significantly worse decision to make for the first time during an active incident than to have already resolved in advance.</span>
+        <span class="item-extra"><b>Summary</b>Know in advance who your breach lawyer is and which FBI/CISA office to call, so you're not searching for that information during an actual emergency.</span><span class="item-extra"><b>Example</b>A one-page incident response card listing your outside breach counsel's direct line, your local FBI field office cyber contact, and CISA's 24/7 reporting number, kept somewhere accessible even if internal systems are down.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c22-6"><label for="c22-6">
+          <span class="item-title">Conduct a blameless post-incident review after every significant event, with tracked remediation items</span>
+          <span class="item-body">A post-incident review focused on assigning blame discourages honest reporting and root-cause analysis; a blameless review that tracks specific, owned, dated remediation items is what actually prevents the same failure from recurring.</span>
+        <span class="item-extra"><b>Summary</b>After any real incident, hold a review focused on fixing the process, not blaming a person, and actually track whether the fixes get done.</span><span class="item-extra"><b>Example</b>A post-incident review document listing what happened, what worked, what didn't, and specific remediation items each assigned an owner and a due date, revisited at the next monthly security review until closed.</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 23 ============ -->
+    <section class="checklist-section" id="s23">
+      <div class="section-head">
+        <span class="section-num">23</span>
+        <h2>Nation-State Threat Actor Profiles</h2>
+      </div>
+      <p class="section-sub">The four nations most consistently named in CISA advisories and the CSIS incidents referenced throughout this checklist each have distinct, well-documented playbooks. Knowing which group tends to do what makes their specific tricks much easier to recognize before they work.</p>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">China</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c23-1"><label for="c23-1">
+          <span class="item-title">Watch for Volt Typhoon's "living off the land" pre-positioning in critical infrastructure <span class="framework-tag">CISA</span></span>
+          <span class="item-body">Volt Typhoon deliberately avoids custom malware, instead abusing legitimate built-in system tools to blend into normal network activity for months or years without taking any disruptive action, apparently pre-positioning for use during a future crisis rather than immediate espionage.</span>
+        <span class="item-extra"><b>Summary</b>This group hides by using your own normal admin tools against you, sitting quietly for a long time rather than stealing data right away — which is exactly why it's so hard to spot.</span><span class="item-extra"><b>Example</b>Baseline normal administrative tool usage (PowerShell, WMI, native Windows utilities) so a subtle deviation in how or when they're used stands a chance of triggering an alert, since there's no malware signature to catch.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-2"><label for="c23-2">
+          <span class="item-title">Watch for Salt Typhoon's targeting of telecom infrastructure and lawful-intercept systems</span>
+          <span class="item-body">Salt Typhoon has specifically targeted the systems telecom carriers use to comply with law-enforcement wiretap requests, giving the group visibility into which numbers government investigators are already monitoring, alongside broad access to call records and metadata.</span>
+        <span class="item-extra"><b>Summary</b>If you're a telecom or work with one, be aware this group specifically goes after the wiretap and call-record systems, not just general customer data.</span><span class="item-extra"><b>Example</b>Telecom and ISP security teams should treat lawful-intercept and call-detail-record systems as maximum-sensitivity assets requiring the strictest access controls on the network, not standard operational infrastructure.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-3"><label for="c23-3">
+          <span class="item-title">Watch for Silk Typhoon's targeting of IT supply chain and remote-management platforms</span>
+          <span class="item-body">Rather than attacking a target directly, Silk Typhoon has repeatedly compromised the third-party remote support and identity platforms that target organizations already trust, using that trusted access as the entry point instead of a direct exploit against the target itself.</span>
+        <span class="item-extra"><b>Summary</b>This group would rather hack the remote-support tool your IT department already trusts than attack you directly.</span><span class="item-extra"><b>Example</b>Apply the same scrutiny to remote support and identity management vendors (the exact category of tool referenced in Section 13) that you'd apply to a direct internet-facing system.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-4"><label for="c23-4">
+          <span class="item-title">Watch for compromised consumer/SOHO routers used to obscure the true origin of an intrusion</span>
+          <span class="item-body">China-linked groups have repeatedly hijacked end-of-life small office/home office routers to build botnets that relay their traffic, making a nation-state intrusion appear to originate from an ordinary residential IP address rather than infrastructure that would draw suspicion.</span>
+        <span class="item-extra"><b>Summary</b>An attack that looks like it's coming from a random home internet connection might actually be a hijacked router being used to hide where the real attacker is.</span><span class="item-extra"><b>Example</b>Don't automatically deprioritize an alert just because the source IP geolocates to a residential ISP — that's precisely the obfuscation this technique is designed to produce.</span>
+        </label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Russia</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c23-5"><label for="c23-5">
+          <span class="item-title">Watch for Sandworm's willingness to cause real, destructive physical impact on OT/ICS systems</span>
+          <span class="item-body">Unlike most espionage-focused groups, Sandworm (linked to Russian military intelligence) has a documented history of causing actual physical disruption — power grid shutdowns, water utility sabotage, destructive wiper malware — rather than staying purely in reconnaissance and data theft.</span>
+        <span class="item-extra"><b>Summary</b>This group doesn't just spy — it has a track record of actually causing real power outages and physical damage, so OT defenses need to plan for genuine sabotage, not just data theft.</span><span class="item-extra"><b>Example</b>OT incident response plans should explicitly include a "confirmed Sandworm-linked activity" scenario, given the group's documented willingness to escalate to physical disruption rather than just exfiltrate data.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-6"><label for="c23-6">
+          <span class="item-title">Watch for APT28/Fancy Bear's credential-harvesting spearphishing against government and defense targets</span>
+          <span class="item-body">Linked to Russian military intelligence (GRU), this group specializes in convincing spearphishing campaigns using fake login pages closely mimicking real webmail and VPN portals, harvesting credentials directly rather than relying primarily on malware.</span>
+        <span class="item-extra"><b>Summary</b>This group's specialty is fake login pages that look almost identical to the real thing — train staff to check the actual URL, not just how the page looks.</span><span class="item-extra"><b>Example</b>Defense contractors and government-adjacent organizations should prioritize phishing-resistant MFA (Section 16) specifically because this group's primary technique is credential theft, not malware delivery.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-7"><label for="c23-7">
+          <span class="item-title">Watch for Midnight Blizzard/APT29's patient, stealthy cloud and email-platform espionage</span>
+          <span class="item-body">Linked to Russia's foreign intelligence service (SVR), this group is associated with the SolarWinds supply-chain compromise and repeated Microsoft 365/Azure AD targeting, favoring long-term stealth and legitimate-looking access over fast, noisy intrusions.</span>
+        <span class="item-extra"><b>Summary</b>This group plays the long game in cloud email and identity systems specifically — the kind of legacy test-tenant weakness covered in Section 5 is exactly their entry point of choice.</span><span class="item-extra"><b>Example</b>Given this group's documented cloud-identity focus, prioritize the legacy/test-tenant audit and OAuth application review items in Sections 5 and 9 if you're a government contractor or high-value target.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-8"><label for="c23-8">
+          <span class="item-title">Watch for hacktivist front groups (Killnet, NoName057) used for deniable DDoS and disinformation</span>
+          <span class="item-body">Nominally independent hacktivist groups aligned with Russian state interests conduct DDoS attacks and disinformation campaigns timed to coincide with political events, giving the state a layer of plausible deniability the direct intelligence services don't have.</span>
+        <span class="item-extra"><b>Summary</b>Not every Russia-linked attack comes from an official intelligence agency — some come from aligned volunteer groups doing DDoS and propaganda work with a wink and a nod from the state.</span><span class="item-extra"><b>Example</b>If your organization takes a public political stance, particularly regarding Ukraine, expect DDoS capacity planning (Section 9) to matter more around the timing of that announcement.</span>
+        </label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">Iran</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c23-9"><label for="c23-9">
+          <span class="item-title">Watch for CyberAv3ngers' targeting of internet-exposed PLCs with default credentials</span>
+          <span class="item-body">This Iran-linked group has specifically targeted internet-exposed industrial equipment, most notably in the water sector, exploiting nothing more sophisticated than factory-default passwords left unchanged — exactly the pattern described in Section 4.</span>
+        <span class="item-extra"><b>Summary</b>This group looks specifically for industrial equipment still using its default password and reachable from the internet — the exact scenario Section 4 of this checklist is built to close.</span><span class="item-extra"><b>Example</b>Small municipal water and wastewater utilities are disproportionately targeted by this group precisely because they're statistically more likely to still have exposed, default-credentialed PLCs than a larger utility.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-10"><label for="c23-10">
+          <span class="item-title">Watch for APT33/Elfin's destructive wiper malware against energy-sector targets</span>
+          <span class="item-body">This group has a documented history of deploying wiper malware, malicious software designed purely to destroy data with no ransom or recovery option, specifically against energy and aviation sector targets in the Middle East and, at times, the United States.</span>
+        <span class="item-extra"><b>Summary</b>Unlike ransomware, this group's malware is sometimes built purely to destroy data with no way to pay to get it back — which makes offline backups (Section 21) the only real protection.</span><span class="item-extra"><b>Example</b>Energy-sector organizations should treat immutable, offline backups (Section 21) as non-negotiable specifically because this group's malware offers no recovery path even if you're willing to pay.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-11"><label for="c23-11">
+          <span class="item-title">Watch for Charming Kitten/APT35's long-term fake-persona social engineering</span>
+          <span class="item-body">This group builds elaborate, patient fake personas, posing as journalists, researchers, or conference organizers over weeks or months of legitimate-seeming correspondence, before eventually delivering a malicious link or attachment once trust is established.</span>
+        <span class="item-extra"><b>Summary</b>This group is willing to build a fake relationship with a target over weeks or months before ever sending anything malicious — a friendly, ongoing conversation isn't automatically safe.</span><span class="item-extra"><b>Example</b>Academics, journalists, and policy researchers should be especially cautious of unsolicited but seemingly credible outreach for interviews or collaboration, a documented pattern for this specific group.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-12"><label for="c23-12">
+          <span class="item-title">Watch for hack-and-leak operations designed for psychological and political impact over financial gain</span>
+          <span class="item-body">Iran-linked operations have repeatedly prioritized publicly leaking stolen data or defacing systems for maximum visibility and embarrassment over quietly monetizing the access, meaning the attacker's goal may be reputational damage rather than the extortion payout a ransomware group would seek.</span>
+        <span class="item-extra"><b>Summary</b>Sometimes the goal isn't money at all — it's public embarrassment or political disruption, so don't assume a "no ransom demand" incident means it's less serious.</span><span class="item-extra"><b>Example</b>Crisis communications plans (Section 22) should account for a scenario where stolen data is leaked publicly with no advance extortion warning at all, unlike the typical ransomware playbook.</span>
+        </label>
+      </div>
+
+      <h3 style="color:var(--green-dim); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin:26px 0 4px;">North Korea</h3>
+      <div class="check-item">
+        <input type="checkbox" id="c23-13"><label for="c23-13">
+          <span class="item-title">Watch for Lazarus Group's large-scale cryptocurrency theft to fund state programs</span>
+          <span class="item-body">This group has stolen billions of dollars in cryptocurrency across multiple incidents, with proceeds widely assessed to help fund North Korea's weapons programs, making crypto exchanges and DeFi platforms an unusually high-value, well-resourced, and patient target relative to typical financially motivated cybercrime.</span>
+        <span class="item-extra"><b>Summary</b>If you're in crypto, understand that this isn't opportunistic criminal hacking — it's a well-funded state program specifically targeting exchanges and DeFi platforms to generate revenue.</span><span class="item-extra"><b>Example</b>Crypto platforms should apply the multisig and third-party audit requirements in Section 9's financial items with particular rigor, given this group's demonstrated patience and resourcing.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-14"><label for="c23-14">
+          <span class="item-title">Watch for fake job-offer and coding-test lures targeting software developers</span>
+          <span class="item-body">A well-documented campaign uses fake recruiter outreach on LinkedIn and job boards, sending a "technical assessment" or malicious npm/PyPI package disguised as a coding exercise, that installs malware once the developer runs it in their normal development environment.</span>
+        <span class="item-extra"><b>Summary</b>A "coding test" from an unfamiliar recruiter can be a malware delivery mechanism — run any unfamiliar downloaded code in an isolated environment, not your main development machine.</span><span class="item-extra"><b>Example</b>Require developers to run any external coding assessment or unfamiliar package in an isolated container or VM, never directly on a machine with access to production credentials.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-15"><label for="c23-15">
+          <span class="item-title">Watch for DPRK nationals posing as legitimate remote IT contractors to gain insider access</span>
+          <span class="item-body">A distinct and increasingly documented scheme involves North Korean IT workers using stolen or fabricated identities to get hired as remote contractors at U.S. companies, generating revenue for the regime while sometimes also providing insider access for follow-on compromise.</span>
+        <span class="item-extra"><b>Summary</b>Some remote IT contract workers may not be who their resume says they are — verify identity thoroughly for remote hires with system access, not just for on-site employees.</span><span class="item-extra"><b>Example</b>Apply the same background-check rigor from Section 19 to remote contractors as to employees, including video verification during interviews and stronger identity-document checks for fully remote technical hires.</span>
+        </label>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="c23-16"><label for="c23-16">
+          <span class="item-title">Recognize that North Korean operations uniquely blend espionage with direct revenue generation</span>
+          <span class="item-body">Unlike most nation-state actors who separate espionage from financially motivated cybercrime, North Korean state-linked operations frequently pursue both goals simultaneously, meaning a seemingly financially motivated intrusion shouldn't be automatically assumed to be ordinary criminal activity rather than state-directed.</span>
+        <span class="item-extra"><b>Summary</b>Don't assume a financially motivated attack against you is "just criminals" — for this country specifically, financial theft and state espionage are often the same operation.</span><span class="item-extra"><b>Example</b>When reporting a financially motivated intrusion to law enforcement (Section 22), mention any indicators consistent with DPRK tooling even if the apparent motive looks purely criminal, since attribution affects how agencies prioritize the case.</span>
+        </label>
+      </div>
+    </section>
+
     <!-- ============ SOURCES ============ -->
     <section class="sources" id="sources">
       <h2>Sources &amp; Further Reading</h2>
@@ -1801,15 +2318,35 @@ getcap -r / 2>/dev/null</code></pre> Waiting to detect exploitation means the at
             <li><a href="https://www.first.org/epss/" target="_blank" rel="noopener">FIRST — Exploit Prediction Scoring System (EPSS)</a></li>
             <li><a href="https://www.csis.org/programs/strategic-technologies-program/significant-cyber-incidents" target="_blank" rel="noopener">CSIS — Significant Cyber Incidents Timeline</a></li>
           </ul>
+          <h3>Regulatory &amp; Compliance</h3>
+          <ul>
+            <li><a href="https://www.hhs.gov/hipaa/for-professionals/security/index.html" target="_blank" rel="noopener">HHS — HIPAA Security Rule</a></li>
+            <li><a href="https://www.pcisecuritystandards.org/" target="_blank" rel="noopener">PCI Security Standards Council</a></li>
+            <li><a href="https://gdpr.eu/" target="_blank" rel="noopener">GDPR.eu — data subject rights guidance</a></li>
+            <li><a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener">California CCPA/CPRA — Attorney General guidance</a></li>
+            <li><a href="https://csrc.nist.gov/pubs/sp/800/34/r1/final" target="_blank" rel="noopener">NIST SP 800-34 — Contingency Planning Guide</a></li>
+          </ul>
           <h3>Frameworks &amp; Standards</h3>
           <ul>
             <li><a href="https://d3fend.mitre.org/" target="_blank" rel="noopener">MITRE D3FEND</a></li>
             <li><a href="https://attack.mitre.org/" target="_blank" rel="noopener">MITRE ATT&amp;CK</a></li>
+            <li><a href="https://attack.mitre.org/groups/" target="_blank" rel="noopener">MITRE ATT&amp;CK Groups — named threat actor profiles</a></li>
             <li><a href="https://cwe.mitre.org/top25/" target="_blank" rel="noopener">SANS/CWE Top 25 Most Dangerous Software Errors</a></li>
             <li><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener">NIST Cybersecurity Framework 2.0</a></li>
             <li><a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener">OWASP Top 10 (Web &amp; LLM)</a></li>
             <li><a href="https://owasp.org/API-Security/editions/2023/en/0x00-header/" target="_blank" rel="noopener">OWASP API Security Top 10</a></li>
             <li><a href="https://www.cisecurity.org/cis-benchmarks" target="_blank" rel="noopener">CIS Benchmarks (Docker, Kubernetes, Cloud)</a></li>
+            <li><a href="https://www.cisecurity.org/controls" target="_blank" rel="noopener">CIS Critical Security Controls v8</a></li>
+            <li><a href="https://atlas.mitre.org/" target="_blank" rel="noopener">MITRE ATLAS — adversarial ML threat matrix</a></li>
+            <li><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener">NIST AI Risk Management Framework</a></li>
+          </ul>
+          <h3>Industry &amp; Standards Bodies</h3>
+          <ul>
+            <li><a href="https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards" target="_blank" rel="noopener">ISA/IEC 62443 — Industrial Automation &amp; Control Systems Security</a></li>
+            <li><a href="https://www.sans.org/cyber-security-courses/?focus-area=ics-ot" target="_blank" rel="noopener">SANS ICS/OT Security Resources</a></li>
+            <li><a href="https://cloudsecurityalliance.org/" target="_blank" rel="noopener">Cloud Security Alliance (CSA)</a></li>
+            <li><a href="https://www.asisonline.org/" target="_blank" rel="noopener">ASIS International — physical security standards</a></li>
+            <li><a href="https://www.isaca.org/" target="_blank" rel="noopener">ISACA — governance, risk &amp; audit standards</a></li>
           </ul>
           <h3>Threat Intelligence &amp; Monitoring</h3>
           <ul>
@@ -1819,6 +2356,8 @@ getcap -r / 2>/dev/null</code></pre> Waiting to detect exploitation means the at
             <li><a href="https://isc.sans.edu/" target="_blank" rel="noopener">SANS Internet Storm Center</a></li>
             <li><a href="https://otx.alienvault.com/" target="_blank" rel="noopener">AlienVault OTX — open threat exchange</a></li>
             <li><a href="https://urlhaus.abuse.ch/" target="_blank" rel="noopener">abuse.ch — URLhaus &amp; ThreatFox feeds</a></li>
+            <li><a href="https://www.virustotal.com/" target="_blank" rel="noopener">VirusTotal — file/URL reputation lookup</a></li>
+            <li><a href="https://www.crowdsec.net/" target="_blank" rel="noopener">CrowdSec — community-driven threat feed</a></li>
           </ul>
         </div>
         <div>
@@ -1831,6 +2370,9 @@ getcap -r / 2>/dev/null</code></pre> Waiting to detect exploitation means the at
             <li><a href="https://github.com/BloodHoundAD/BloodHound" target="_blank" rel="noopener">BloodHound — AD attack-path mapping</a></li>
             <li><a href="https://www.osquery.io/" target="_blank" rel="noopener">osquery — endpoint visibility &amp; querying</a></li>
             <li><a href="https://www.wireshark.org/" target="_blank" rel="noopener">Wireshark — packet capture &amp; analysis</a></li>
+            <li><a href="https://trivy.dev/" target="_blank" rel="noopener">Trivy — container image vulnerability scanning</a></li>
+            <li><a href="https://www.vaultproject.io/" target="_blank" rel="noopener">HashiCorp Vault — secrets management</a></li>
+            <li><a href="https://securityheaders.com/" target="_blank" rel="noopener">securityheaders.com — HTTP header scanner</a></li>
           </ul>
           <h3>Vulnerability &amp; Attack-Surface Testing</h3>
           <ul>
@@ -1847,6 +2389,27 @@ getcap -r / 2>/dev/null</code></pre> Waiting to detect exploitation means the at
             <li><a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="noopener">Qualys SSL Labs — TLS configuration testing</a></li>
             <li><a href="https://www.wi-fi.org/discover-wi-fi/security" target="_blank" rel="noopener">Wi-Fi Alliance — WPA3 Security</a></li>
             <li><a href="https://dmarc.org/" target="_blank" rel="noopener">DMARC.org — email authentication guidance</a></li>
+            <li><a href="https://www.cisa.gov/resources-tools/resources/zero-trust-maturity-model" target="_blank" rel="noopener">CISA Zero Trust Maturity Model</a></li>
+          </ul>
+          <h3>Incident Response &amp; Crisis Management</h3>
+          <ul>
+            <li><a href="https://www.first.org/" target="_blank" rel="noopener">FIRST.org — global incident response community</a></li>
+            <li><a href="https://www.sans.org/incident-response/" target="_blank" rel="noopener">SANS Incident Response Resources</a></li>
+            <li><a href="https://www.ic3.gov/" target="_blank" rel="noopener">FBI Internet Crime Complaint Center (IC3)</a></li>
+            <li><a href="https://www.cisa.gov/report" target="_blank" rel="noopener">CISA — Report a Cyber Incident</a></li>
+            <li><a href="https://www.ncsc.gov.uk/collection/incident-management" target="_blank" rel="noopener">UK NCSC — Incident Management Guidance</a></li>
+            <li><a href="https://www.iso.org/standard/78157.html" target="_blank" rel="noopener">ISO/IEC 27035 — Information Security Incident Management</a></li>
+            <li><a href="https://www.cisa.gov/resources-tools/resources/federal-government-cybersecurity-incident-and-vulnerability-response-playbooks" target="_blank" rel="noopener">CISA Federal Incident &amp; Vulnerability Response Playbooks</a></li>
+          </ul>
+          <h3>Business Continuity &amp; Crisis Management</h3>
+          <ul>
+            <li><a href="https://www.iso.org/standard/75106.html" target="_blank" rel="noopener">ISO 22301 — Business Continuity Management Systems</a></li>
+            <li><a href="https://drii.org/" target="_blank" rel="noopener">DRI International — BC/DR certification &amp; body of knowledge</a></li>
+            <li><a href="https://www.thebci.org/" target="_blank" rel="noopener">The Business Continuity Institute (BCI)</a></li>
+            <li><a href="https://www.ready.gov/business" target="_blank" rel="noopener">Ready.gov — Business Continuity Planning Suite</a></li>
+            <li><a href="https://csrc.nist.gov/pubs/sp/800/34/r1/final" target="_blank" rel="noopener">NIST SP 800-34 — Contingency Planning Guide</a></li>
+            <li><a href="https://www.fema.gov/emergency-managers/national-preparedness/continuity" target="_blank" rel="noopener">FEMA — Continuity of Operations Guidance</a></li>
+            <li><a href="https://www.isaca.org/resources/business-continuity-management" target="_blank" rel="noopener">ISACA — Business Continuity Management Resources</a></li>
           </ul>
           <h3>GTFOBins / LOLBAS</h3>
           <ul>
